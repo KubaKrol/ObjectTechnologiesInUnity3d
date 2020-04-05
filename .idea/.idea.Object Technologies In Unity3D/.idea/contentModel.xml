@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\rozporek\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\rozporek\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Object Technologies In Unity3D.-77042260.00" t="ExcludeRecursive" />
+    <e p="H:\Object Technologies In Unity3D" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Editor" t="Include">
+          <e p="HexCoordinatesDrawer.cs" t="Include" />
+        </e>
+        <e p="Readme.txt" t="Include" />
+        <e p="Scripts" t="Include">
+          <e p="HexGrid" t="Include">
+            <e p="HexCell.cs" t="Include" />
+            <e p="HexCellSettings.cs" t="Include" />
+            <e p="HexCoordinates.cs" t="Include" />
+            <e p="HexGrid.cs" t="Include" />
+            <e p="HexMetrics.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Object Technologies In Unity3D.sln" t="IncludeFlat" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
