@@ -26,7 +26,7 @@ public class HexGridInputHandler
     {
         if (_CurrentGameInput.SingleClick())
         {
-            _HexGrid.SelectCell(_CurrentGameInput.PointerWorldPosition());
+            _HexGrid.GetCell(_CurrentGameInput.PointerWorldPosition());
         }
     }
     

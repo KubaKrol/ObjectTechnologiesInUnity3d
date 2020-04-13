@@ -16,6 +16,9 @@
             <e p="GameCamera.cs" t="Include" />
             <e p="GameCameraInputHandler.cs" t="Include" />
           </e>
+          <e p="Events" t="Include">
+            <e p="OnHexCellClicked.cs" t="Include" />
+          </e>
           <e p="GameManager.cs" t="Include" />
           <e p="HexGrid" t="Include">
             <e p="HexCell.cs" t="Include" />

@@ -29,8 +29,8 @@ public class GameCameraInputHandler
         if (_CurrentGameInput.SingleClick())
         {
             _InputStartPosition = _CurrentGameInput.PointerWorldPosition();
-            _GameCameraStartPosition = _GameCamera.transform.position;
             _InputStartPositionInCameraLocalSpace = _GameCamera.transform.InverseTransformPoint(_InputStartPosition);
+            _GameCameraStartPosition = _GameCamera.transform.position;
         }
         
         if (_CurrentGameInput.HoldingScreen())

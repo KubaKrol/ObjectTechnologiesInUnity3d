@@ -10,13 +10,30 @@ public class HexCell : MonoBehaviour
         Field,
         Water,
         Forest,
-        City
+        City,
+        Mountains
     }
 
-    public enum ECurrentState
+    public enum ESelectionState
     {
         Idle,
         Selected
+    }
+
+    public enum ELocomotionState
+    {
+        Blocked,
+        Walkable,
+        Swimmingable
+    }
+
+    public enum EConflictSide
+    {
+        Independent,
+        Player_1,
+        Player_2,
+        Player_3,
+        Player_4
     }
     
     #endregion Public Types
@@ -25,7 +42,9 @@ public class HexCell : MonoBehaviour
     #region Public Variables
 
     public ECellType cellType;
-    public ECurrentState currentState;
+    public ESelectionState selectionState;
+    public ELocomotionState locomotionState;
+    public EConflictSide conflictSide;
     
     #endregion Public Variables
 
@@ -35,13 +54,49 @@ public class HexCell : MonoBehaviour
     public void Select()
     {
         mySelectionHighlightObject.SetActive(true);
-        currentState = ECurrentState.Selected;
+        selectionState = ESelectionState.Selected;
     }
 
     public void Deselect()
     {
         mySelectionHighlightObject.SetActive(false);
-        currentState = ECurrentState.Idle;
+        selectionState = ESelectionState.Idle;
+    }
+
+    public void SetCellType(ECellType cellType)
+    {
+        switch (cellType)
+        {
+            case ECellType.Field:
+                _MySpriteRenderer.color = cellSettings.fieldColor;
+                locomotionState = ELocomotionState.Walkable;
+                break;
+            
+            case ECellType.Water:
+                _MySpriteRenderer.color = cellSettings.waterColor;
+                locomotionState = ELocomotionState.Swimmingable;
+                break;
+            
+            case ECellType.Forest:
+                _MySpriteRenderer.color = cellSettings.forestColor;
+                locomotionState = ELocomotionState.Walkable;
+                break;
+            
+            case ECellType.City:
+                _MySpriteRenderer.color = cellSettings.cityColor;
+                locomotionState = ELocomotionState.Walkable;
+                break;
+            
+            case ECellType.Mountains:
+                _MySpriteRenderer.color = cellSettings.mountainsColor;
+                locomotionState = ELocomotionState.Blocked;
+                break;
+            
+            default:
+                _MySpriteRenderer.color = cellSettings.fieldColor;
+                locomotionState = ELocomotionState.Walkable;
+                break;
+        }
     }
     
     #endregion Public Methods
@@ -65,33 +120,13 @@ public class HexCell : MonoBehaviour
         _MySpriteRenderer = GetComponent<SpriteRenderer>();
 
         cellType = ECellType.Field;
-        currentState = ECurrentState.Idle;
+        selectionState = ESelectionState.Idle;
+        conflictSide = EConflictSide.Independent;
     }
     
     private void Start()
     {
-        switch (cellType)
-        {
-            case ECellType.Field:
-                _MySpriteRenderer.color = cellSettings.fieldColor;
-                break;
-            
-            case ECellType.Water:
-                _MySpriteRenderer.color = cellSettings.waterColor;
-                break;
-            
-            case ECellType.Forest:
-                _MySpriteRenderer.color = cellSettings.forestColor;
-                break;
-            
-            case ECellType.City:
-                _MySpriteRenderer.color = cellSettings.cityColor;
-                break;
-            
-            default:
-                _MySpriteRenderer.color = cellSettings.fieldColor;
-                break;
-        }
+       SetCellType(cellType);
     }
     
     #endregion Unity Methods

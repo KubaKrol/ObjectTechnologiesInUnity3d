@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class HexGrid : MonoBehaviour 
@@ -56,27 +57,10 @@ public class HexGrid : MonoBehaviour
 
     #region Public Methods
 
-    public void SelectCell(HexCell cellToSelect)
-    {
-        if (cellToSelect.currentState == HexCell.ECurrentState.Selected)
-        {
-            return;
-        }
-        else
-        {
-            foreach (var cell in _Cells)
-            {
-                cell.Deselect();
-            }
-            
-            cellToSelect.Select();
-        }
-    }
-
-    public void SelectCell(Vector2 selectionWorldPosition)
+    public HexCell GetCell(Vector2 selectionWorldPosition)
     {
         var smallestPositionDifference = Mathf.Infinity;
-        HexCell cellToSelect = null;
+        HexCell cellToReturn = null;
         
         foreach (var cell in _Cells)
         {
@@ -87,15 +71,17 @@ public class HexGrid : MonoBehaviour
             
             if(differenceInTotal < smallestPositionDifference)
             {
-                cellToSelect = cell;
+                cellToReturn = cell;
                 smallestPositionDifference = differenceInTotal;
             }
         }
 
-        if (cellToSelect != null)
-        {
-            SelectCell(cellToSelect);
-        }
+        return cellToReturn != null ? cellToReturn : null;
+    }
+
+    public HexCell GetCell(HexCoordinates coordinates)
+    {
+        return _CellsDictionary[coordinates];
     }
 
     #endregion Public Methods
@@ -110,6 +96,8 @@ public class HexGrid : MonoBehaviour
 
     [SerializeField] public int width = 6;
     [SerializeField] public int height = 6;
+
+    [SerializeField] public bool showLabels;
     
     #endregion Inspector Variables
 
@@ -128,10 +116,6 @@ public class HexGrid : MonoBehaviour
         centerPosition = new Vector3(widthInWorldCoordinates / 2f - HexMetrics.innerRadius, heightInWorldCoordinates / 2f - HexMetrics.outerRadius, transform.position.z);
     }
 
-    private void Start()
-    {
-    }
-
     private void Update()
     {
         _InputHandler.HandleInput();
@@ -145,6 +129,7 @@ public class HexGrid : MonoBehaviour
     private HexGridInputHandler _InputHandler;    
     
     private HexCell[] _Cells;
+    private Dictionary<HexCoordinates, HexCell> _CellsDictionary = new Dictionary<HexCoordinates, HexCell>();
     private Canvas _GridCanvas;
 
     private Vector3 _CenterPosition;
@@ -166,11 +151,15 @@ public class HexGrid : MonoBehaviour
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, y);
         cell.cellType = cellType;
-        
-        Text label = Instantiate<Text>(cellLabelPrefab);
-        label.rectTransform.SetParent(_GridCanvas.transform, false);
-        label.rectTransform.anchoredPosition = new Vector2(position.x, position.y);
-        label.text = cell.coordinates.ToStringOnSeparateLines();
+        _CellsDictionary.Add(cell.coordinates, cell);
+
+        if (showLabels)
+        {
+            Text label = Instantiate<Text>(cellLabelPrefab);
+            label.rectTransform.SetParent(_GridCanvas.transform, false);
+            label.rectTransform.anchoredPosition = new Vector2(position.x, position.y);
+            label.text = cell.coordinates.ToStringOnSeparateLines();   
+        }
     }
 
     private void CreateGrid()

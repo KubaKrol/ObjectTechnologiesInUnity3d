@@ -6,13 +6,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/HexGrid/HexCell.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/HexGrid/HexCell.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/GameCameraInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/GameCameraInputHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Input/IAmInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Input/IAmInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Input/MouseInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Input/MouseInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerInputHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerInputHandler.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridInputHandler.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +22,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCoordinates.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Events/OnHexCellClicked.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/HexCoordinatesDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Input/MouseInput.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -44,9 +43,7 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCoordinates.cs" />
         <option value="$PROJECT_DIR$/Assets/Editor/HexCoordinatesDrawer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Input/GameInput.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Input/IAmInput.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridCamera.cs" />
@@ -55,10 +52,13 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/GameCamera.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Input/MouseInput.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridInputHandler.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Camera/GameCamera.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Camera/GameCameraInputHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Events/OnHexCellClicked.cs" />
       </list>
     </option>
   </component>
@@ -111,7 +111,8 @@
       <workItem from="1586095878503" duration="3000" />
       <workItem from="1586100555827" duration="13270000" />
       <workItem from="1586458560038" duration="178000" />
-      <workItem from="1586771785945" duration="17378000" />
+      <workItem from="1586771785945" duration="20484000" />
+      <workItem from="1586804093148" duration="1449000" />
     </task>
     <servers />
   </component>
@@ -142,9 +143,13 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="498" height="445" key="SwitcherDM/0.0.2560.1400/2560.0.1080.1880@0.0.2560.1400" timestamp="1586792521229" />
-    <state x="936" y="353" width="670" height="676" key="search.everywhere.popup" timestamp="1586792162879">
+    <state x="936" y="330" key="run.anything.popup" timestamp="1586795568008">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="936" y="353" width="670" height="676" key="search.everywhere.popup/0.0.2560.1400/2560.0.1080.1880@0.0.2560.1400" timestamp="1586792162879" />
+    <state x="936" y="330" key="run.anything.popup/0.0.2560.1400/2560.0.1080.1880@0.0.2560.1400" timestamp="1586795568008" />
+    <state x="936" y="353" width="672" height="676" key="search.everywhere.popup" timestamp="1586797748502">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="936" y="353" width="672" height="676" key="search.everywhere.popup/0.0.2560.1400/2560.0.1080.1880@0.0.2560.1400" timestamp="1586797748502" />
   </component>
 </project>

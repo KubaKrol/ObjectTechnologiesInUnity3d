@@ -9,4 +9,5 @@ public class HexCellSettings : ScriptableObject
     [SerializeField] public Color waterColor;
     [SerializeField] public Color forestColor;
     [SerializeField] public Color cityColor;
+    [SerializeField] public Color mountainsColor;
 }
