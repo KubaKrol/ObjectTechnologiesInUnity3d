@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerInputHandler
+public class HexGridInputHandler
 {
     #region Public Types
 
@@ -17,16 +14,19 @@ public class PlayerInputHandler
 
     #region Public Methods
 
-    public PlayerInputHandler(IAmInput input)
+    public HexGridInputHandler(
+        IAmInput currentGameInput,
+        HexGrid hexGrid)
     {
-        _CurrentInput = input;
+        _CurrentGameInput = currentGameInput;
+        _HexGrid = hexGrid;
     }
 
     public void HandleInput()
     {
-        if (_CurrentInput.SingleClick())
+        if (_CurrentGameInput.SingleClick())
         {
-            HexGrid.SelectCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            _HexGrid.SelectCell(_CurrentGameInput.PointerWorldPosition());
         }
     }
     
@@ -45,7 +45,11 @@ public class PlayerInputHandler
 
     #region Private Variables
 
-    private IAmInput _CurrentInput;
+    private IAmInput _CurrentGameInput;
+    private HexGrid _HexGrid;
+
+    private Vector2 _InputStartPosition;
+    private Vector2 _HexGridCameraStartPosition;
 
     #endregion Private Variables
 

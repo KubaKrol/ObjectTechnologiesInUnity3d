@@ -12,11 +12,17 @@
         </e>
         <e p="Readme.txt" t="Include" />
         <e p="Scripts" t="Include">
+          <e p="Camera" t="Include">
+            <e p="GameCamera.cs" t="Include" />
+            <e p="GameCameraInputHandler.cs" t="Include" />
+          </e>
+          <e p="GameManager.cs" t="Include" />
           <e p="HexGrid" t="Include">
             <e p="HexCell.cs" t="Include" />
             <e p="HexCellSettings.cs" t="Include" />
             <e p="HexCoordinates.cs" t="Include" />
             <e p="HexGrid.cs" t="Include" />
+            <e p="HexGridInputHandler.cs" t="Include" />
             <e p="HexMetrics.cs" t="Include" />
           </e>
           <e p="Input" t="Include">

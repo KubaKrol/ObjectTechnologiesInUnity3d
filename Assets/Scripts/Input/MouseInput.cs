@@ -8,29 +8,24 @@ public class MouseInput : IAmInput
     {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
-    
-    public Vector2 ScreenHoldPosition()
-    {
-        throw new System.NotImplementedException();
-    }
 
     public bool SingleClick()
     {
-        return Input.GetMouseButtonUp(0);
+        return Input.GetMouseButtonDown(0);
     }
     
     public bool HoldingScreen()
     {
-        throw new System.NotImplementedException();
+        return Input.GetMouseButton(0);
     }
 
-    public bool ZoomIn()
+    public float ZoomIn()
     {
-        throw new System.NotImplementedException();
+        return (Input.mouseScrollDelta.y);
     }
 
-    public bool ZoomOut()
+    public float ZoomOut()
     {
-        throw new System.NotImplementedException();
+        return (Input.mouseScrollDelta.y);
     }
 }

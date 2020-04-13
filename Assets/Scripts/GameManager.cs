@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     #region Public Types
 
@@ -21,7 +21,8 @@ public class PlayerController : MonoBehaviour
 
     #region Inspector Variables
 
-    [SerializeField] private GameInput currentGameInput;
+    [SerializeField] private GameCamera _GameCamera;
+    [SerializeField] private HexGrid _HexGrid;
     
     #endregion Inspector Variables
 
@@ -30,20 +31,23 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _InputHandler = new PlayerInputHandler(currentGameInput.currentInput);
+        
     }
-    
+
+    private void Start()
+    {
+        _GameCamera.SetTargetPosition(_HexGrid.centerPosition);
+    }
+
     private void Update()
     {
-        _InputHandler.HandleInput();
+        
     }
     
     #endregion Unity Methods
 
 
     #region Private Variables
-
-    private PlayerInputHandler _InputHandler;
 
     #endregion Private Variables
 

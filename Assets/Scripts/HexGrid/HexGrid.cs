@@ -9,13 +9,54 @@ public class HexGrid : MonoBehaviour
 
 
     #region Public Variables
+    
+    public Vector3 centerPosition;
+    
+    public float widthInWorldCoordinates
+    {
+        get
+        {
+            var worldWidth = 0f;
+            
+            for (var i = 0; i < width; i++)
+            {
+                worldWidth += HexMetrics.innerRadius * 2f;
+            }
+
+            worldWidth += HexMetrics.innerRadius;
+
+            return worldWidth;
+        }
+    }
+
+    public float heightInWorldCoordinates
+    {
+        get
+        {
+            var worldHeight = 0f;
+            
+            for (var i = 0; i < height; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    worldHeight += HexMetrics.outerRadius * 2f;
+                }
+                else
+                {
+                    worldHeight += HexMetrics.innerRadius;
+                }
+            }
+
+            return worldHeight;
+        }
+    }
 
     #endregion Public Variables
 
 
     #region Public Methods
 
-    public static void SelectCell(HexCell cellToSelect)
+    public void SelectCell(HexCell cellToSelect)
     {
         if (cellToSelect.currentState == HexCell.ECurrentState.Selected)
         {
@@ -32,7 +73,7 @@ public class HexGrid : MonoBehaviour
         }
     }
 
-    public static void SelectCell(Vector2 selectionWorldPosition)
+    public void SelectCell(Vector2 selectionWorldPosition)
     {
         var smallestPositionDifference = Mathf.Infinity;
         HexCell cellToSelect = null;
@@ -62,9 +103,11 @@ public class HexGrid : MonoBehaviour
 
     #region Inspector Variables
 
+    [SerializeField] private GameInput _GameInput;
+    
     [SerializeField] public HexCell cellPrefab;
     [SerializeField] public Text cellLabelPrefab;
-    
+
     [SerializeField] public int width = 6;
     [SerializeField] public int height = 6;
     
@@ -75,13 +118,23 @@ public class HexGrid : MonoBehaviour
     
     private void Awake ()
     {
+        _InputHandler = new HexGridInputHandler(_GameInput.currentInput, this);
+        
         _GridCanvas = GetComponentInChildren<Canvas>();
         _Cells = new HexCell[height * width];
+        
+        CreateGrid();
+
+        centerPosition = new Vector3(widthInWorldCoordinates / 2f - HexMetrics.innerRadius, heightInWorldCoordinates / 2f - HexMetrics.outerRadius, transform.position.z);
     }
 
     private void Start()
     {
-        CreateGrid();
+    }
+
+    private void Update()
+    {
+        _InputHandler.HandleInput();
     }
 
     #endregion Unity Methods
@@ -89,8 +142,12 @@ public class HexGrid : MonoBehaviour
 
     #region Private Variables
 
-    private static HexCell[] _Cells;
+    private HexGridInputHandler _InputHandler;    
+    
+    private HexCell[] _Cells;
     private Canvas _GridCanvas;
+
+    private Vector3 _CenterPosition;
     
     #endregion Private Variables
 

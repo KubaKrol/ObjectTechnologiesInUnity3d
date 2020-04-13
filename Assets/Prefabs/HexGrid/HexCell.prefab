@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 3326239288650268315}
   - component: {fileID: 3326239288650268316}
   - component: {fileID: 3326239288650268317}
+  - component: {fileID: 4914872681116807011}
   m_Layer: 0
   m_Name: HexCell
   m_TagString: Untagged
@@ -136,10 +137,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellType: 0
+  currentState: 0
   coordinates:
     x: 0
     y: 0
   cellSettings: {fileID: 11400000, guid: c36c78e499872ea4b86b4ae8055a5de8, type: 2}
+  mySelectionHighlightObject: {fileID: 2433516207432385427}
 --- !u!212 &3326239288650268317
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -179,7 +182,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ed9a08f982e4e9e4392c4ea558258644, type: 3}
-  m_Color: {r: 0.14117646, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -189,3 +192,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &4914872681116807011
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326239288650268318}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5300016, y: 4.800001, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
