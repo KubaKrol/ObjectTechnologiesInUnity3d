@@ -45,6 +45,15 @@ public class HexCell : MonoBehaviour
     public ESelectionState selectionState;
     public ELocomotionState locomotionState;
     public EConflictSide conflictSide;
+
+    public GridFigure currentFigure
+    {
+        get
+        {
+            _CurrentFigure = GetComponentInChildren<GridFigure>();
+            return _CurrentFigure;
+        }
+    }
     
     #endregion Public Variables
 
@@ -115,6 +124,16 @@ public class HexCell : MonoBehaviour
 
     #region Unity Methods
 
+    private void OnEnable()
+    {
+        HexGrid.SelectCellAction += SelectCellAction;
+    }
+
+    private void OnDisable()
+    {
+        HexGrid.SelectCellAction -= SelectCellAction;
+    }
+    
     private void Awake()
     {
         _MySpriteRenderer = GetComponent<SpriteRenderer>();
@@ -128,7 +147,7 @@ public class HexCell : MonoBehaviour
     {
        SetCellType(cellType);
     }
-    
+
     #endregion Unity Methods
 
 
@@ -136,11 +155,25 @@ public class HexCell : MonoBehaviour
 
     private SpriteRenderer _MySpriteRenderer;
 
+    private GridFigure _CurrentFigure;
+
     #endregion Private Variables
 
 
     #region Private Methods
 
+    private void SelectCellAction(HexCell hexCell)
+    {
+        if (hexCell == this)
+        {
+            Select();
+        }
+        else
+        {
+            Deselect();
+        }
+    }
+    
     #endregion Private Methods
 
 

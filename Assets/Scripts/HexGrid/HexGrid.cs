@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class HexGrid : MonoBehaviour 
@@ -10,6 +12,8 @@ public class HexGrid : MonoBehaviour
 
 
     #region Public Variables
+
+    public static UnityAction<HexCell> SelectCellAction;
     
     public Vector3 centerPosition;
     
