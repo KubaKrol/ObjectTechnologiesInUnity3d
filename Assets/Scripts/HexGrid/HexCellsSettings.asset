@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5244adae4e0e64395597e8a1ef6068, type: 3}
   m_Name: HexCellsSettings
   m_EditorClassIdentifier: 
-  fieldColor: {r: 0, g: 0, b: 0, a: 0}
-  waterColor: {r: 0, g: 0, b: 0, a: 0}
-  forestColor: {r: 0, g: 0, b: 0, a: 0}
-  cityColor: {r: 0, g: 0, b: 0, a: 0}
+  fieldColor: {r: 0.64171255, g: 1, b: 0.4669811, a: 1}
+  waterColor: {r: 0.24056602, g: 0.38867894, b: 1, a: 1}
+  forestColor: {r: 0.21882989, g: 0.5, b: 0.19103774, a: 1}
+  cityColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}

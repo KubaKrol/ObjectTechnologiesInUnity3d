@@ -19,6 +19,11 @@
             <e p="HexGrid.cs" t="Include" />
             <e p="HexMetrics.cs" t="Include" />
           </e>
+          <e p="Input" t="Include">
+            <e p="GameInput.cs" t="Include" />
+            <e p="IAmInput.cs" t="Include" />
+            <e p="MouseInput.cs" t="Include" />
+          </e>
         </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />

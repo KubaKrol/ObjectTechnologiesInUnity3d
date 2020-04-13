@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc56e991-508f-44e9-b91e-a159c872880a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/HexGrid/HexCell.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/HexGrid/HexCell.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +18,10 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCoordinates.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/HexCoordinatesDrawer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Input/MouseInput.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Input/GameInput.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Input/IAmInput.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://D:/UnityProjects/RogueBall/Assets/Scripts/Input/GameInput.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" root0="FORCE_HIGHLIGHTING" />
@@ -32,6 +35,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Input/MouseInput.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Input/IAmInput.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Input/GameInput.cs" />
       </list>
     </option>
   </component>
@@ -82,7 +88,7 @@
       <option name="presentableId" value="Default" />
       <updated>1586095876977</updated>
       <workItem from="1586095878503" duration="3000" />
-      <workItem from="1586100555827" duration="6960000" />
+      <workItem from="1586100555827" duration="8810000" />
     </task>
     <servers />
   </component>
@@ -103,6 +109,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="1074" y="401" key="RiderGenerateDialog" timestamp="1586114233797">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1074" y="401" key="RiderGenerateDialog/0.0.2560.1400/2560.0.1080.1880@0.0.2560.1400" timestamp="1586114233797" />
     <state width="498" height="445" key="SwitcherDM" timestamp="1586109342583">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

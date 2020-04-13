@@ -15,6 +15,48 @@ public class HexGrid : MonoBehaviour
 
     #region Public Methods
 
+    public static void SelectCell(HexCell cellToSelect)
+    {
+        if (cellToSelect.currentState == HexCell.ECurrentState.Selected)
+        {
+            return;
+        }
+        else
+        {
+            foreach (var cell in _Cells)
+            {
+                cell.Deselect();
+            }
+            
+            cellToSelect.Select();
+        }
+    }
+
+    public static void SelectCell(Vector2 selectionWorldPosition)
+    {
+        var smallestPositionDifference = Mathf.Infinity;
+        HexCell cellToSelect = null;
+        
+        foreach (var cell in _Cells)
+        {
+            var xDifference = Mathf.Abs(cell.transform.localPosition.x - selectionWorldPosition.x);
+            var yDifference = Mathf.Abs(cell.transform.localPosition.y - selectionWorldPosition.y);
+
+            var differenceInTotal = xDifference + yDifference;
+            
+            if(differenceInTotal < smallestPositionDifference)
+            {
+                cellToSelect = cell;
+                smallestPositionDifference = differenceInTotal;
+            }
+        }
+
+        if (cellToSelect != null)
+        {
+            SelectCell(cellToSelect);
+        }
+    }
+
     #endregion Public Methods
 
 
@@ -47,7 +89,7 @@ public class HexGrid : MonoBehaviour
 
     #region Private Variables
 
-    private HexCell[] _Cells;
+    private static HexCell[] _Cells;
     private Canvas _GridCanvas;
     
     #endregion Private Variables
@@ -72,7 +114,6 @@ public class HexGrid : MonoBehaviour
         label.rectTransform.SetParent(_GridCanvas.transform, false);
         label.rectTransform.anchoredPosition = new Vector2(position.x, position.y);
         label.text = cell.coordinates.ToStringOnSeparateLines();
-
     }
 
     private void CreateGrid()
