@@ -33,7 +33,7 @@ public class GameCameraInputHandler
             _GameCameraStartPosition = _GameCamera.transform.position;
         }
         
-        if (_CurrentGameInput.HoldingScreen())
+        if (_CurrentGameInput.HoldingScreenToLookAround())
         {
             var pointerCurrentPositionRelativeToStartingPosition = -(_CurrentGameInput.PointerWorldPosition() - _InputStartPosition);
             _InputStartPosition = _GameCamera.transform.TransformPoint(_InputStartPositionInCameraLocalSpace);

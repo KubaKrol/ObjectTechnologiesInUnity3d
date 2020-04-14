@@ -6,19 +6,14 @@ public class GridFigure : MonoBehaviour
 {
     #region Public Types
 
-    public enum ESelectionState
-    {
-        Idle,
-        Selected
-    }
-    
     #endregion Public Types
 
 
     #region Public Variables
 
-    public ESelectionState selectionState;
-    
+    public GenericEnums.ESelectionState selectionState;
+    public GenericEnums.EConflictSide conflictSide;
+
     #endregion Public Variables
 
 
@@ -26,13 +21,13 @@ public class GridFigure : MonoBehaviour
 
     public virtual void Select()
     {
-        selectionState = ESelectionState.Selected;
+        selectionState = GenericEnums.ESelectionState.Selected;
         ShowMovementRange(true);
     }
 
     public virtual void Deselect()
     {
-        selectionState = ESelectionState.Idle;
+        selectionState = GenericEnums.ESelectionState.Idle;
         ShowMovementRange(false);
     }
     
@@ -46,15 +41,22 @@ public class GridFigure : MonoBehaviour
 
     public virtual void ShowMovementRange(bool active)
     {
+        _CurrentMovementRange = DefaultMovementRange;
+
+        if (_MyHexCell.cellType == HexCell.ECellType.Forest)
+        {
+            _CurrentMovementRange /= 2;
+        }
+        
         var currentHexCoordinates = _MyHexCell.coordinates;
         
-        for(int i = currentHexCoordinates.X - movementRange; i <= currentHexCoordinates.X + movementRange; i++)
+        for(var i = currentHexCoordinates.X - DefaultMovementRange; i <= currentHexCoordinates.X + DefaultMovementRange; i++)
         {
-            for (int j = currentHexCoordinates.Y - movementRange; j <= currentHexCoordinates.Y + movementRange; j++)
+            for (var j = currentHexCoordinates.Y - DefaultMovementRange; j <= currentHexCoordinates.Y + DefaultMovementRange; j++)
             {
                 var targetHexCell = HexGrid.GetCell(new HexCoordinates(i, j));
 
-                if (targetHexCell != null && HexMetrics.Distance(_MyHexCell, targetHexCell) <= 2)
+                if (targetHexCell != null && HexMetrics.Distance(_MyHexCell, targetHexCell) <= _CurrentMovementRange)
                 {
                     targetHexCell.ShowMovementAvailability(active);
                 }
@@ -67,8 +69,10 @@ public class GridFigure : MonoBehaviour
 
     #region Inspector Variables
 
-    [SerializeField] public int movementRange = 2;
-    
+    [SerializeField] public int DefaultMovementRange = 2;
+    [SerializeField] public int FigureStrength = 16;
+    [SerializeField] public int FigureMorals = 8;
+
     #endregion Inspector Variables
 
 
@@ -94,10 +98,12 @@ public class GridFigure : MonoBehaviour
 
     #region Private Variables
 
-    private HexCell _MyHexCell;
+    protected HexCell _MyHexCell;
     
-    private Coroutine _MoveCoroutine;
-    private Vector2 _MovingVelocity;
+    protected Coroutine _MoveCoroutine;
+    protected Vector2 _MovingVelocity;
+
+    protected int _CurrentMovementRange;
     
     #endregion Private Variables
 
@@ -108,13 +114,26 @@ public class GridFigure : MonoBehaviour
     {
         if (hexCell == _MyHexCell)
         {
-            Select();
+            switch (selectionState)
+            {
+                case GenericEnums.ESelectionState.Idle:
+                    Select();
+                    break;
+                
+                case GenericEnums.ESelectionState.Selected:
+                    Deselect();
+                    break;
+                
+                default:
+                    Select();
+                    break;
+            }
         }
         else
         {
-            if (selectionState == ESelectionState.Selected)
+            if (selectionState == GenericEnums.ESelectionState.Selected)
             {
-                if (HexMetrics.Distance(_MyHexCell, hexCell) <= 2)
+                if (HexMetrics.Distance(_MyHexCell, hexCell) <= _CurrentMovementRange && hexCell.showingMovementAvailability)
                 {
                     MoveFigure(hexCell);
                 }

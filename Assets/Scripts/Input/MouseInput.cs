@@ -14,7 +14,7 @@ public class MouseInput : IAmInput
         return Input.GetMouseButtonDown(0);
     }
     
-    public bool HoldingScreen()
+    public bool HoldingScreenToLookAround()
     {
         return Input.GetMouseButton(0);
     }

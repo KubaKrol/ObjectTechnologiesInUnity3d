@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -177,7 +176,18 @@ public class HexGrid : MonoBehaviour
         {
             for (int x = 0; x < width; x++) 
             {
-                CreateCell(x, y, i++);   
+                if (y > 10 && x > 10)
+                {
+                    CreateCell(x, y, i++, HexCell.ECellType.Water);   
+                }
+                else if (y > 10 && x < 10)
+                {
+                    CreateCell(x, y, i++, HexCell.ECellType.Forest);
+                }
+                else
+                {
+                    CreateCell(x, y, i++);      
+                }
             }
         }
     }

@@ -16,9 +16,13 @@
             <e p="GameCamera.cs" t="Include" />
             <e p="GameCameraInputHandler.cs" t="Include" />
           </e>
+          <e p="Enums" t="Include">
+            <e p="GenericEnums.cs" t="Include" />
+          </e>
           <e p="GameManager.cs" t="Include" />
           <e p="GridFigures" t="Include">
             <e p="GridFigure.cs" t="Include" />
+            <e p="WalkingFigure.cs" t="Include" />
           </e>
           <e p="HexGrid" t="Include">
             <e p="HexCell.cs" t="Include" />

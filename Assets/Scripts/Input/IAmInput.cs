@@ -5,7 +5,7 @@ public interface IAmInput
     Vector2 PointerWorldPosition();
 
     bool SingleClick();
-    bool HoldingScreen();
+    bool HoldingScreenToLookAround();
     float ZoomIn();
     float ZoomOut();
 }

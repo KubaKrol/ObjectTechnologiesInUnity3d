@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 public class HexCell : MonoBehaviour
 {
@@ -14,12 +13,6 @@ public class HexCell : MonoBehaviour
         Mountains
     }
 
-    public enum ESelectionState
-    {
-        Idle,
-        Selected
-    }
-
     public enum ELocomotionState
     {
         Blocked,
@@ -27,24 +20,17 @@ public class HexCell : MonoBehaviour
         Swimmingable
     }
 
-    public enum EConflictSide
-    {
-        Independent,
-        Player_1,
-        Player_2,
-        Player_3,
-        Player_4
-    }
-    
     #endregion Public Types
 
 
     #region Public Variables
 
     public ECellType cellType;
-    public ESelectionState selectionState;
+    public GenericEnums.ESelectionState selectionState;
     public ELocomotionState locomotionState;
-    public EConflictSide conflictSide;
+    public GenericEnums.EConflictSide conflictSide;
+    
+    public bool showingMovementAvailability { get; private set; }
 
     public GridFigure currentlyHeldFigure
     {
@@ -63,18 +49,19 @@ public class HexCell : MonoBehaviour
     public void Select()
     {
         mySelectionHighlightObject.SetActive(true);
-        selectionState = ESelectionState.Selected;
+        selectionState = GenericEnums.ESelectionState.Selected;
     }
 
     public void Deselect()
     {
         mySelectionHighlightObject.SetActive(false);
-        selectionState = ESelectionState.Idle;
+        selectionState = GenericEnums.ESelectionState.Idle;
     }
 
     public void ShowMovementAvailability(bool active)
     {
         myMovementRangeHighlightObject.SetActive(active);
+        showingMovementAvailability = active;
     }
 
     public void SetCellType(ECellType cellType)
@@ -145,8 +132,8 @@ public class HexCell : MonoBehaviour
         _MySpriteRenderer = GetComponent<SpriteRenderer>();
 
         cellType = ECellType.Field;
-        selectionState = ESelectionState.Idle;
-        conflictSide = EConflictSide.Independent;
+        selectionState = GenericEnums.ESelectionState.Idle;
+        conflictSide = GenericEnums.EConflictSide.Independent;
     }
     
     private void Start()
