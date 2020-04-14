@@ -21,6 +21,7 @@
           </e>
           <e p="GameManager.cs" t="Include" />
           <e p="GridFigures" t="Include">
+            <e p="FlyingFigure.cs" t="Include" />
             <e p="GridFigure.cs" t="Include" />
             <e p="WalkingFigure.cs" t="Include" />
           </e>

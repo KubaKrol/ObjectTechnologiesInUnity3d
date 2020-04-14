@@ -135,11 +135,12 @@ public class GridFigure : MonoBehaviour
             {
                 if (HexMetrics.Distance(_MyHexCell, hexCell) <= _CurrentMovementRange && hexCell.showingMovementAvailability)
                 {
+                    Deselect();
                     MoveFigure(hexCell);
                 }
+                
+                Deselect();
             }
-            
-            Deselect();
         }
     }
 
@@ -150,6 +151,8 @@ public class GridFigure : MonoBehaviour
 
     private IEnumerator MoveFigureCoroutine(HexCell hexCell)
     {
+        _MyHexCell = hexCell;
+        
         transform.parent = null;
         
         while (Math.Abs(transform.position.x - hexCell.transform.position.x) > 0.05f ||
@@ -160,9 +163,9 @@ public class GridFigure : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
-
-        _MyHexCell = hexCell;
+        
         transform.parent = hexCell.transform;
+        _MyHexCell.Deselect();
 
         _MoveCoroutine = null;
     }

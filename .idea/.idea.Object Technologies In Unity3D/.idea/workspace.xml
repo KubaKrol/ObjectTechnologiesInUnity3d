@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc56e991-508f-44e9-b91e-a159c872880a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/GameCameraInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/GameCameraInputHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Input/IAmInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Input/IAmInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Input/MouseInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Input/MouseInput.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +25,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../UnityProjects/Assets/Scripts/Code/Other/EventManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridFigures/FlyingFigure.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridInputHandler.cs" root0="FORCE_HIGHLIGHTING" />
@@ -63,10 +57,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Enums/GenericEnums.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GridFigures/WalkingFigure.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Input/IAmInput.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Input/MouseInput.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GridFigures/FlyingFigure.cs" />
       </list>
     </option>
   </component>
@@ -122,7 +117,7 @@
       <workItem from="1586771785945" duration="20484000" />
       <workItem from="1586804093148" duration="5944000" />
       <workItem from="1586849018175" duration="6286000" />
-      <workItem from="1586859431680" duration="2539000" />
+      <workItem from="1586859431680" duration="3291000" />
     </task>
     <servers />
   </component>

@@ -184,6 +184,10 @@ public class HexGrid : MonoBehaviour
                 {
                     CreateCell(x, y, i++, HexCell.ECellType.Forest);
                 }
+                else if (x < 3 && y < 3)
+                {
+                    CreateCell(x, y, i++, HexCell.ECellType.Mountains);
+                }
                 else
                 {
                     CreateCell(x, y, i++);      
