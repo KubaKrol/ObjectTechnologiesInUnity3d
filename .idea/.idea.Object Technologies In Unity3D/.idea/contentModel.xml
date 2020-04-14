@@ -30,7 +30,10 @@
             <e p="HexCellSettings.cs" t="Include" />
             <e p="HexCoordinates.cs" t="Include" />
             <e p="HexGrid.cs" t="Include" />
+            <e p="HexGridCityPlanner.cs" t="Include" />
             <e p="HexGridInputHandler.cs" t="Include" />
+            <e p="HexGridPerlinNoiseGenerator.cs" t="Include" />
+            <e p="HexGridSettings.cs" t="Include" />
             <e p="HexMetrics.cs" t="Include" />
           </e>
           <e p="Input" t="Include">

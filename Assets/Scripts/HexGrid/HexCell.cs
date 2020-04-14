@@ -66,6 +66,8 @@ public class HexCell : MonoBehaviour
 
     public void SetCellType(ECellType cellType)
     {
+        this.cellType = cellType;
+        
         switch (cellType)
         {
             case ECellType.Field:
@@ -84,6 +86,7 @@ public class HexCell : MonoBehaviour
                 break;
             
             case ECellType.City:
+                Debug.Log("Miasto postawione");
                 _MySpriteRenderer.color = cellSettings.cityColor;
                 locomotionState = ELocomotionState.Walkable;
                 break;
@@ -130,15 +133,9 @@ public class HexCell : MonoBehaviour
     private void Awake()
     {
         _MySpriteRenderer = GetComponent<SpriteRenderer>();
-
-        cellType = ECellType.Field;
+        
         selectionState = GenericEnums.ESelectionState.Idle;
         conflictSide = GenericEnums.EConflictSide.Independent;
-    }
-    
-    private void Start()
-    {
-       SetCellType(cellType);
     }
 
     #endregion Unity Methods

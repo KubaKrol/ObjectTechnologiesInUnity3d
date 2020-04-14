@@ -22,7 +22,7 @@ public class HexGrid : MonoBehaviour
         {
             var worldWidth = 0f;
             
-            for (var i = 0; i < width; i++)
+            for (var i = 0; i < _HexGridSettings.width; i++)
             {
                 worldWidth += HexMetrics.innerRadius * 2f;
             }
@@ -39,7 +39,7 @@ public class HexGrid : MonoBehaviour
         {
             var worldHeight = 0f;
             
-            for (var i = 0; i < height; i++)
+            for (var i = 0; i < _HexGridSettings.height; i++)
             {
                 if (i % 2 == 0)
                 {
@@ -60,15 +60,15 @@ public class HexGrid : MonoBehaviour
 
     #region Public Methods
 
-    public static HexCell GetCell(Vector2 selectionWorldPosition)
+    public static HexCell GetCell(Vector2 worldPosition)
     {
         var smallestPositionDifference = Mathf.Infinity;
         HexCell cellToReturn = null;
         
         foreach (var cell in _Cells)
         {
-            var xDifference = Mathf.Abs(cell.transform.localPosition.x - selectionWorldPosition.x);
-            var yDifference = Mathf.Abs(cell.transform.localPosition.y - selectionWorldPosition.y);
+            var xDifference = Mathf.Abs(cell.transform.localPosition.x - worldPosition.x);
+            var yDifference = Mathf.Abs(cell.transform.localPosition.y - worldPosition.y);
 
             var differenceInTotal = xDifference + yDifference;
             
@@ -92,21 +92,31 @@ public class HexGrid : MonoBehaviour
         return null;
     }
 
+    public static HexCell GetCell(int i, int j)
+    {
+        if (i > 0 && j > 0)
+        {
+            if (_Cells2D.Length >= i)
+            {
+                if (_Cells2D[i].Length >= j)
+                {
+                    return _Cells2D[i][j];
+                }
+            }   
+        }
+
+        Debug.LogError("CellNotFound");
+        return null;
+    }
+
     #endregion Public Methods
 
 
     #region Inspector Variables
 
     [SerializeField] private GameInput _GameInput;
-    
-    [SerializeField] public HexCell cellPrefab;
-    [SerializeField] public Text cellLabelPrefab;
+    [SerializeField] private HexGridSettings _HexGridSettings;
 
-    [SerializeField] public int width = 6;
-    [SerializeField] public int height = 6;
-
-    [SerializeField] public bool showLabels;
-    
     #endregion Inspector Variables
 
 
@@ -117,11 +127,17 @@ public class HexGrid : MonoBehaviour
         _InputHandler = new HexGridInputHandler(_GameInput.currentInput, this);
         
         _GridCanvas = GetComponentInChildren<Canvas>();
-        _Cells = new HexCell[height * width];
+        
+        _Cells = new HexCell[_HexGridSettings.height * _HexGridSettings.width];
+        _Cells2D = new HexCell[_HexGridSettings.width][];
+        for (var i = 0; i < _HexGridSettings.width; i++)
+        {
+            _Cells2D[i] = new HexCell[_HexGridSettings.height];
+        }
+        
+        centerPosition = new Vector3(widthInWorldCoordinates / 2f - HexMetrics.innerRadius, heightInWorldCoordinates / 2f - HexMetrics.outerRadius, transform.position.z);
         
         CreateGrid();
-
-        centerPosition = new Vector3(widthInWorldCoordinates / 2f - HexMetrics.innerRadius, heightInWorldCoordinates / 2f - HexMetrics.outerRadius, transform.position.z);
     }
 
     private void Update()
@@ -134,9 +150,12 @@ public class HexGrid : MonoBehaviour
 
     #region Private Variables
 
-    private HexGridInputHandler _InputHandler;    
+    private HexGridInputHandler _InputHandler;
+    private HexGridPerlinNoiseGenerator _PerlinNoiseGenerator;
+    private HexGridCityPlanner _HexGridCityPlanner;
     
     private static HexCell[] _Cells;
+    private static HexCell[][] _Cells2D;
     private static Dictionary<HexCoordinates, HexCell> _CellsDictionary = new Dictionary<HexCoordinates, HexCell>();
     private Canvas _GridCanvas;
 
@@ -154,16 +173,17 @@ public class HexGrid : MonoBehaviour
         position.y = y * (HexMetrics.outerRadius * 1.5f);
         position.z = 0f;
         
-        HexCell cell = _Cells[i] = Instantiate<HexCell>(cellPrefab);
+        HexCell cell = _Cells[i] = Instantiate<HexCell>(_HexGridSettings.cellPrefab);
+        _Cells2D[x][y] = cell;
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, y);
-        cell.cellType = cellType;
+        cell.SetCellType(cellType);
         _CellsDictionary.Add(cell.coordinates, cell);
 
-        if (showLabels)
+        if (_HexGridSettings.showLabels)
         {
-            Text label = Instantiate<Text>(cellLabelPrefab);
+            Text label = Instantiate<Text>(_HexGridSettings.cellLabelPrefab);
             label.rectTransform.SetParent(_GridCanvas.transform, false);
             label.rectTransform.anchoredPosition = new Vector2(position.x, position.y);
             label.text = cell.coordinates.ToStringOnSeparateLines();   
@@ -172,27 +192,39 @@ public class HexGrid : MonoBehaviour
 
     private void CreateGrid()
     {
-        for (int y = 0, i = 0; y < height; y++) 
+        _PerlinNoiseGenerator = new HexGridPerlinNoiseGenerator(_HexGridSettings);
+        var noise = _PerlinNoiseGenerator.GenerateNoise(Random.Range(0, 10000), 0.2f, 0.2f);
+        
+        for (int y = 0, i = 0; y < _HexGridSettings.height; y++) 
         {
-            for (int x = 0; x < width; x++) 
+            for (int x = 0; x < _HexGridSettings.width; x++) 
             {
-                if (y > 10 && x > 10)
+                if (noise[y][x] < 0.3f)
                 {
-                    CreateCell(x, y, i++, HexCell.ECellType.Water);   
+                    CreateCell(x, y, i++, HexCell.ECellType.Water);     
                 }
-                else if (y > 10 && x < 10)
+
+                if (noise[y][x] >= 0.3f && noise[y][x] < 0.55f)
+                {
+                    CreateCell(x, y, i++, HexCell.ECellType.Field);
+                }
+                
+                if (noise[y][x] >= 0.55f && noise[y][x] < 0.75f)
                 {
                     CreateCell(x, y, i++, HexCell.ECellType.Forest);
                 }
-                else if (x < 3 && y < 3)
+                
+                if (noise[y][x] >= 0.75f)
                 {
                     CreateCell(x, y, i++, HexCell.ECellType.Mountains);
                 }
-                else
-                {
-                    CreateCell(x, y, i++);      
-                }
             }
+        }
+        
+        if (_HexGridSettings.runCityPlanner)
+        {
+            _HexGridCityPlanner = new HexGridCityPlanner(this, _HexGridSettings);
+            _HexGridCityPlanner.RunCityPlanner();   
         }
     }
     
