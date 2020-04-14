@@ -7,7 +7,7 @@ public class HexGridInputHandler
     #endregion Public Types
 
 
-    #region Public Variables
+    #region Public VariablesH
 
     #endregion Public Variables
 
@@ -26,7 +26,7 @@ public class HexGridInputHandler
     {
         if (_CurrentGameInput.SingleClick())
         {
-            HexGrid.SelectCellAction?.Invoke(_HexGrid.GetCell(_CurrentGameInput.PointerWorldPosition()));
+            HexGrid.SelectCellAction?.Invoke(HexGrid.GetCell(_CurrentGameInput.PointerWorldPosition()));
         }
     }
     

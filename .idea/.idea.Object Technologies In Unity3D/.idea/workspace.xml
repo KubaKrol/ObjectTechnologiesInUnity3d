@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc56e991-508f-44e9-b91e-a159c872880a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/HexGrid/HexCell.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/HexGrid/HexCell.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridInputHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +36,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Camera/GameCamera.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Input/IAmInput.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/UnityProjects/RogueBall/Assets/Scripts/Input/GameInput.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -41,7 +45,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCoordinates.cs" />
         <option value="$PROJECT_DIR$/Assets/Editor/HexCoordinatesDrawer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Input/GameInput.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Input/IAmInput.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridCamera.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerInputHandler.cs" />
@@ -53,10 +56,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Events/OnHexCellClicked.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Camera/GameCamera.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridInputHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridInputHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" />
       </list>
     </option>
   </component>
@@ -110,7 +114,8 @@
       <workItem from="1586100555827" duration="13270000" />
       <workItem from="1586458560038" duration="178000" />
       <workItem from="1586771785945" duration="20484000" />
-      <workItem from="1586804093148" duration="5865000" />
+      <workItem from="1586804093148" duration="5944000" />
+      <workItem from="1586849018175" duration="5747000" />
     </task>
     <servers />
   </component>
@@ -137,10 +142,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1074" y="401" key="RiderGenerateDialog/0.0.2560.1400/2560.0.1080.1880@0.0.2560.1400" timestamp="1586114233797" />
-    <state width="498" height="445" key="SwitcherDM" timestamp="1586792521229">
+    <state width="498" height="445" key="SwitcherDM" timestamp="1586852692898">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="498" height="445" key="SwitcherDM/0.0.2560.1400/2560.0.1080.1880@0.0.2560.1400" timestamp="1586792521229" />
+    <state width="498" height="445" key="SwitcherDM/0.0.2560.1400/2560.0.1080.1880@0.0.2560.1400" timestamp="1586852692898" />
     <state x="936" y="330" key="run.anything.popup" timestamp="1586795568008">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

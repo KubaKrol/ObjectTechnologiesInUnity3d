@@ -61,7 +61,7 @@ public class HexGrid : MonoBehaviour
 
     #region Public Methods
 
-    public HexCell GetCell(Vector2 selectionWorldPosition)
+    public static HexCell GetCell(Vector2 selectionWorldPosition)
     {
         var smallestPositionDifference = Mathf.Infinity;
         HexCell cellToReturn = null;
@@ -83,9 +83,14 @@ public class HexGrid : MonoBehaviour
         return cellToReturn != null ? cellToReturn : null;
     }
 
-    public HexCell GetCell(HexCoordinates coordinates)
+    public static HexCell GetCell(HexCoordinates coordinates)
     {
-        return _CellsDictionary[coordinates];
+        if (_CellsDictionary.ContainsKey(coordinates) && _CellsDictionary[coordinates] != null)
+        {
+            return _CellsDictionary[coordinates];   
+        }
+
+        return null;
     }
 
     #endregion Public Methods
@@ -132,8 +137,8 @@ public class HexGrid : MonoBehaviour
 
     private HexGridInputHandler _InputHandler;    
     
-    private HexCell[] _Cells;
-    private Dictionary<HexCoordinates, HexCell> _CellsDictionary = new Dictionary<HexCoordinates, HexCell>();
+    private static HexCell[] _Cells;
+    private static Dictionary<HexCoordinates, HexCell> _CellsDictionary = new Dictionary<HexCoordinates, HexCell>();
     private Canvas _GridCanvas;
 
     private Vector3 _CenterPosition;
@@ -172,14 +177,7 @@ public class HexGrid : MonoBehaviour
         {
             for (int x = 0; x < width; x++) 
             {
-                if (x == 1 && y == 1)
-                {
-                    CreateCell(x, y, i++, HexCell.ECellType.City);
-                }
-                else
-                {
-                    CreateCell(x, y, i++);   
-                }
+                CreateCell(x, y, i++);   
             }
         }
     }

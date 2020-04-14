@@ -24,6 +24,18 @@ public class GridFigure : MonoBehaviour
 
     #region Public Methods
 
+    public virtual void Select()
+    {
+        selectionState = ESelectionState.Selected;
+        ShowMovementRange(true);
+    }
+
+    public virtual void Deselect()
+    {
+        selectionState = ESelectionState.Idle;
+        ShowMovementRange(false);
+    }
+    
     public virtual void MoveFigure(HexCell hexCell)
     {
         if (_MoveCoroutine == null)
@@ -32,21 +44,31 @@ public class GridFigure : MonoBehaviour
         }
     }
 
-    public virtual void Select()
+    public virtual void ShowMovementRange(bool active)
     {
-        selectionState = ESelectionState.Selected;
+        var currentHexCoordinates = _MyHexCell.coordinates;
+        
+        for(int i = currentHexCoordinates.X - movementRange; i <= currentHexCoordinates.X + movementRange; i++)
+        {
+            for (int j = currentHexCoordinates.Y - movementRange; j <= currentHexCoordinates.Y + movementRange; j++)
+            {
+                var targetHexCell = HexGrid.GetCell(new HexCoordinates(i, j));
+
+                if (targetHexCell != null && HexMetrics.Distance(_MyHexCell, targetHexCell) <= 2)
+                {
+                    targetHexCell.ShowMovementAvailability(active);
+                }
+            }
+        }
     }
 
-    public virtual void Deselect()
-    {
-        selectionState = ESelectionState.Idle;
-    }
-    
     #endregion Public Methods
 
 
     #region Inspector Variables
 
+    [SerializeField] public int movementRange = 2;
+    
     #endregion Inspector Variables
 
 
@@ -60,6 +82,11 @@ public class GridFigure : MonoBehaviour
     private void OnDisable()
     {
         HexGrid.SelectCellAction -= OnHexCellSelected;
+    }
+
+    private void Start()
+    {
+        MoveFigure(HexGrid.GetCell(new HexCoordinates(5, 5)));
     }
 
     #endregion Unity Methods
@@ -85,10 +112,18 @@ public class GridFigure : MonoBehaviour
         }
         else
         {
+            if (selectionState == ESelectionState.Selected)
+            {
+                if (HexMetrics.Distance(_MyHexCell, hexCell) <= 2)
+                {
+                    MoveFigure(hexCell);
+                }
+            }
+            
             Deselect();
         }
     }
-    
+
     #endregion Private Methods
 
 
@@ -98,8 +133,8 @@ public class GridFigure : MonoBehaviour
     {
         transform.parent = null;
         
-        while (Math.Abs(transform.position.x - hexCell.transform.position.x) > 0.01f &&
-               Math.Abs(transform.position.y - hexCell.transform.position.y) > 0.01f)
+        while (Math.Abs(transform.position.x - hexCell.transform.position.x) > 0.05f ||
+               Math.Abs(transform.position.y - hexCell.transform.position.y) > 0.05f)
         {
             transform.position =
                 Vector2.SmoothDamp(transform.position, hexCell.transform.position, ref _MovingVelocity, 0.1f);

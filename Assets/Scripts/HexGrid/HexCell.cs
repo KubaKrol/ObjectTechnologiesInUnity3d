@@ -46,7 +46,7 @@ public class HexCell : MonoBehaviour
     public ELocomotionState locomotionState;
     public EConflictSide conflictSide;
 
-    public GridFigure currentFigure
+    public GridFigure currentlyHeldFigure
     {
         get
         {
@@ -70,6 +70,11 @@ public class HexCell : MonoBehaviour
     {
         mySelectionHighlightObject.SetActive(false);
         selectionState = ESelectionState.Idle;
+    }
+
+    public void ShowMovementAvailability(bool active)
+    {
+        myMovementRangeHighlightObject.SetActive(active);
     }
 
     public void SetCellType(ECellType cellType)
@@ -118,6 +123,7 @@ public class HexCell : MonoBehaviour
     [SerializeField] private HexCellSettings cellSettings;
 
     [SerializeField] public GameObject mySelectionHighlightObject;
+    [SerializeField] public GameObject myMovementRangeHighlightObject;
     
     #endregion Inspector Variables
 
