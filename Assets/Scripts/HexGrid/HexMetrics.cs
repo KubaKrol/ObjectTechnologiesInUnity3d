@@ -21,4 +21,37 @@ public static class HexMetrics
                 Mathf.Abs(firstCell.coordinates.X + firstCell.coordinates.Y - secondCell.coordinates.X - secondCell.coordinates.Y) +
                 Mathf.Abs(firstCell.coordinates.Y - secondCell.coordinates.Y)) / 2;
     }
+
+    public static HexCell[] GetAllNeighbours(HexCell hexCell)
+    {
+        HexCell[] neighbours;
+        int amountOfNeighbours = 0;
+
+        HexCoordinates[] directions =
+        {
+            new HexCoordinates(hexCell.coordinates.X + 1, hexCell.coordinates.Y), new HexCoordinates(hexCell.coordinates.X + 1, hexCell.coordinates.Y - 1), new HexCoordinates(hexCell.coordinates.X , hexCell.coordinates.Y - 1),
+            new HexCoordinates(hexCell.coordinates.X - 1, hexCell.coordinates.Y), new HexCoordinates(hexCell.coordinates.X - 1, hexCell.coordinates.Y + 1), new HexCoordinates(hexCell.coordinates.X , hexCell.coordinates.Y + 1),
+        };
+        
+        for (int i = 0; i < 6; i++)
+        {
+            if (HexGrid.GetCell(directions[i]) != null)
+            {
+                amountOfNeighbours++;
+            }
+        }
+        
+        neighbours = new HexCell[amountOfNeighbours];
+
+        for (int i = 0, x = 0; i < 6; i++)
+        {
+            if (HexGrid.GetCell(directions[i]) != null)
+            {
+                neighbours[x] = HexGrid.GetCell(directions[i]);
+                x++;
+            }
+        }
+
+        return neighbours;
+    }
 }

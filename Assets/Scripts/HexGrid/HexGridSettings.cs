@@ -32,7 +32,14 @@ public class HexGridSettings : ScriptableObject
     [SerializeField] public int height = 12;
 
     [SerializeField] public bool showLabels;
+
+    [Header("Perlin noise settings")] 
     
+    [SerializeField] public float xMultiplier = 0.2f;
+    [SerializeField] public float yMultiplier = 0.2f;
+
+    [SerializeField] public float seedRange = 1000;
+
     [Header("City planner Settings")]
     
     [SerializeField] public bool runCityPlanner;

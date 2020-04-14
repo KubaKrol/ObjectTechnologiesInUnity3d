@@ -94,7 +94,7 @@ public class HexGrid : MonoBehaviour
 
     public static HexCell GetCell(int i, int j)
     {
-        if (i > 0 && j > 0)
+        if (i >= 0 && j >= 0)
         {
             if (_Cells2D.Length >= i)
             {
@@ -193,13 +193,18 @@ public class HexGrid : MonoBehaviour
     private void CreateGrid()
     {
         _PerlinNoiseGenerator = new HexGridPerlinNoiseGenerator(_HexGridSettings);
-        var noise = _PerlinNoiseGenerator.GenerateNoise(Random.Range(0, 10000), 0.2f, 0.2f);
+        var noise = _PerlinNoiseGenerator.GenerateNoise(Random.Range(0, _HexGridSettings.seedRange), _HexGridSettings.xMultiplier, _HexGridSettings.yMultiplier);
         
         for (int y = 0, i = 0; y < _HexGridSettings.height; y++) 
         {
             for (int x = 0; x < _HexGridSettings.width; x++) 
             {
-                if (noise[y][x] < 0.3f)
+                if (noise[y][x] < 0.1f)
+                {
+                    CreateCell(x, y, i++, HexCell.ECellType.DeepWater);
+                }
+                
+                if (noise[y][x] >= 0.1f && noise[y][x] < 0.3f)
                 {
                     CreateCell(x, y, i++, HexCell.ECellType.Water);     
                 }
@@ -223,7 +228,7 @@ public class HexGrid : MonoBehaviour
         
         if (_HexGridSettings.runCityPlanner)
         {
-            _HexGridCityPlanner = new HexGridCityPlanner(this, _HexGridSettings);
+            _HexGridCityPlanner = new HexGridCityPlanner(_HexGridSettings);
             _HexGridCityPlanner.RunCityPlanner();   
         }
     }

@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234092f655f703c43b2cbdc83472d878, type: 3}
   m_Name: CustomHexGridSettings
   m_EditorClassIdentifier: 
-  cellPrefab: {fileID: 0}
-  cellLabelPrefab: {fileID: 0}
-  width: 6
-  height: 6
-  showLabels: 0
+  cellPrefab: {fileID: 3326239288650268316, guid: c81fa2bb4429f7b49b152a56cd89811a,
+    type: 3}
+  cellLabelPrefab: {fileID: 1334843212886382290, guid: 5c01d4ad5d396334da69f1fe37a2f93f,
+    type: 3}
+  width: 12
+  height: 12
+  showLabels: 1
+  runCityPlanner: 1
+  DefaultCapitolCornerOffset: 2
+  CitiesPerQuarter: 5

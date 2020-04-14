@@ -315,7 +315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &815568633
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -427,13 +427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   centerPosition: {x: 0, y: 0, z: 0}
   _GameInput: {fileID: 11400000, guid: 879322eb7cb2de445843ca6d1e3f0432, type: 2}
-  cellPrefab: {fileID: 3326239288650268316, guid: c81fa2bb4429f7b49b152a56cd89811a,
-    type: 3}
-  cellLabelPrefab: {fileID: 1334843212886382290, guid: 5c01d4ad5d396334da69f1fe37a2f93f,
-    type: 3}
-  width: 26
-  height: 18
-  showLabels: 1
+  _HexGridSettings: {fileID: 11400000, guid: dc40d4735bc837c4e89f124aad4ee34d, type: 2}
 --- !u!4 &918490720
 Transform:
   m_ObjectHideFlags: 0
@@ -503,7 +497,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 40
+  orthographic size: 150
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

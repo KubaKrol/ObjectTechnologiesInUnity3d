@@ -8,6 +8,7 @@ public class HexCell : MonoBehaviour
     {
         Field,
         Water,
+        DeepWater,
         Forest,
         City,
         Mountains
@@ -80,13 +81,17 @@ public class HexCell : MonoBehaviour
                 locomotionState = ELocomotionState.Swimmingable;
                 break;
             
+            case ECellType.DeepWater:
+                _MySpriteRenderer.color = cellSettings.deepWaterColor;
+                locomotionState = ELocomotionState.Swimmingable;
+                break;
+            
             case ECellType.Forest:
                 _MySpriteRenderer.color = cellSettings.forestColor;
                 locomotionState = ELocomotionState.Walkable;
                 break;
             
             case ECellType.City:
-                Debug.Log("Miasto postawione");
                 _MySpriteRenderer.color = cellSettings.cityColor;
                 locomotionState = ELocomotionState.Walkable;
                 break;
