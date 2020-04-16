@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GenericEnums;
+using UnityEngine;
 
 public class HexCell : MonoBehaviour
 {
@@ -26,10 +27,10 @@ public class HexCell : MonoBehaviour
 
     #region Public Variables
 
-    public ECellType cellType;
-    public GenericEnums.ESelectionState selectionState;
-    public ELocomotionState locomotionState;
-    public GenericEnums.EConflictSide conflictSide;
+    public ECellType cellType { get; private set; }
+    public GenericEnums.ESelectionState selectionState { get; private set; }
+    public ELocomotionState locomotionState { get; private set; }
+    public GenericEnums.EConflictSide conflictSide { get; private set; }
 
     public int orderInRenderingLayer { get; private set; }
     
@@ -101,6 +102,7 @@ public class HexCell : MonoBehaviour
                 //_MySpriteRenderer.color = cellSettings.cityColor;
                 _MySpriteRenderer.sprite = cellSettings.citySprite;
                 locomotionState = ELocomotionState.Walkable;
+                InstantiateCity(_GameSettings);
                 break;
             
             case ECellType.Mountains:
@@ -117,7 +119,7 @@ public class HexCell : MonoBehaviour
         }
     }
     
-    public void UpdateOrderInLayer(int orderInLayer)
+    public void SetOrderInLayer(int orderInLayer)
     {
         if (cellType == ECellType.Water)
             orderInLayer -= 2;
@@ -127,6 +129,22 @@ public class HexCell : MonoBehaviour
 
         mySelectionHighlightObject.GetComponent<SpriteRenderer>().sortingOrder = orderInLayer + 1;
         myMovementRangeHighlightObject.GetComponent<SpriteRenderer>().sortingOrder = orderInLayer + 1;
+        myConflictSideSpriteRenderer.sortingOrder = orderInLayer + 1;
+    }
+
+    public void SetConflictSide(EConflictSide conflictSide)
+    {
+        this.conflictSide = conflictSide;
+
+        if (conflictSide != EConflictSide.Independent)
+        {
+            myConflictSideSpriteRenderer.gameObject.SetActive(true);
+            myConflictSideSpriteRenderer.color = _GameSettings.GetConflictSideColor(conflictSide);   
+        }
+        else
+        {
+            myConflictSideSpriteRenderer.gameObject.SetActive(false);
+        }
     }
     
     #endregion Public Methods
@@ -134,13 +152,22 @@ public class HexCell : MonoBehaviour
 
     #region Inspector Variables
 
+    [Header("Settings")]
+    
     [SerializeField] public HexCoordinates coordinates;
 
     [SerializeField] private HexCellSettings cellSettings;
+    [SerializeField] private GameSettings gameSettings;
 
     [SerializeField] public GameObject mySelectionHighlightObject;
     [SerializeField] public GameObject myMovementRangeHighlightObject;
+
+    [SerializeField] public SpriteRenderer myConflictSideSpriteRenderer;
+
+    [Header("Dependencies")]
     
+    [SerializeField] private GameSettings _GameSettings;
+
     #endregion Inspector Variables
 
 
@@ -178,7 +205,7 @@ public class HexCell : MonoBehaviour
 
     #region Private Methods
 
-    private void SelectCellAction(HexCell hexCell)
+    private void SelectCellAction(HexCell hexCell, EConflictSide conflictSide)
     {
         if (hexCell == this)
         {
@@ -188,6 +215,12 @@ public class HexCell : MonoBehaviour
         {
             Deselect();
         }
+    }
+
+    private void InstantiateCity(GameSettings gameSettings)
+    {
+        var city = gameObject.AddComponent<City>();
+        city.GameSettings = gameSettings;
     }
 
     #endregion Private Methods

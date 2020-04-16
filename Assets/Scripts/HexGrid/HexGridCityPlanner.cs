@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using GenericEnums;
+using UnityEngine;
 
 public class HexGridCityPlanner
 {
@@ -8,7 +10,7 @@ public class HexGridCityPlanner
 
 
     #region Public Variables
-
+    
     #endregion Public Variables
 
 
@@ -26,6 +28,7 @@ public class HexGridCityPlanner
             Debug.LogError("City planner cannot work on grids smaller than 12x12");
         }
         
+        PlaceCapitols();
         PlaceCities();
     }
     
@@ -69,8 +72,16 @@ public class HexGridCityPlanner
         {
             var newCityCell = HexGrid.GetCell((int) positions[i].x, (int) positions[i].y);
             
+            newCityCell.SetConflictSide((EConflictSide)i+1);
             newCityCell.SetCellType(HexCell.ECellType.City);
             UnblockCell(newCityCell);
+
+            var allNeighbours = HexMetrics.GetAllNeighbours(newCityCell);
+
+            foreach (var neighbour in allNeighbours)
+            {
+                neighbour.SetConflictSide((EConflictSide)i+1);
+            }
         }
     }
 
@@ -98,8 +109,9 @@ public class HexGridCityPlanner
                     var newCityNeighbors = HexMetrics.GetAllNeighbours(selectedCell);
                     var randomNeighbor = Random.Range(0, newCityNeighbors.Length);
 
-                    newCityNeighbors[randomNeighbor].SetCellType(HexCell.ECellType.City);
-                    UnblockCell(newCityNeighbors[randomNeighbor]);
+                    var newCityHexCell = newCityNeighbors[randomNeighbor];
+                    newCityHexCell.SetCellType(HexCell.ECellType.City);
+                    UnblockCell(newCityHexCell);
                 }
             }
         }

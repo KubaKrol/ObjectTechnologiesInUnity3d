@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DefaultHexCellsSettings
   m_EditorClassIdentifier: 
   fieldSprite: {fileID: 21300000, guid: 24075c76516975048880c71176f6b1a0, type: 3}
-  forestSprite: {fileID: 21300000, guid: 434311066b44e76489e67eccdd665621, type: 3}
+  forestSprite: {fileID: 21300000, guid: 458770ec454bf3e418d09309606df474, type: 3}
   deepWaterSprite: {fileID: 21300000, guid: 2f0057d9ded7b684592d473df959b7b4, type: 3}
   waterSprite: {fileID: 21300000, guid: 605ba509907ff794785e1224e4f68336, type: 3}
-  mountainsSprite: {fileID: 21300000, guid: ff242314df49fc6408dad0fe64bc2d96, type: 3}
+  mountainsSprite: {fileID: 21300000, guid: 8495c449d637a4446b1b29ca7bd7059c, type: 3}
   citySprite: {fileID: 21300000, guid: 18b3b8e981d9a714795d27fff329c6c3, type: 3}

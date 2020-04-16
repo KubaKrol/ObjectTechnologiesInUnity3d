@@ -2,11 +2,11 @@
 {
     public enum EConflictSide
     {
-        Independent,
-        Player_1,
-        Player_2,
-        Player_3,
-        Player_4
+        Independent = 0,
+        Player_1 = 1,
+        Player_2 = 2,
+        Player_3 = 3,
+        Player_4 = 4
     }
 
     public enum ESelectionState

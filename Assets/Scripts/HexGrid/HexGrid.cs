@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GenericEnums;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ public class HexGrid : MonoBehaviour
 
     #region Public Variables
 
-    public static UnityAction<HexCell> SelectCellAction;
+    public static UnityAction<HexCell, EConflictSide> SelectCellAction;
     
     public Vector3 centerPosition;
     
@@ -60,6 +61,31 @@ public class HexGrid : MonoBehaviour
 
     #region Public Methods
 
+    public void CreateCell (int x, int y, int i, HexCell.ECellType cellType = HexCell.ECellType.Field) 
+    {
+        Vector3 position;
+        position.x = x * (HexMetrics.outerRadius * 1.5f);
+        position.y = (y + x * 0.5f - x / 2) * (HexMetrics.innerRadius * 2f);
+        position.z = 0f;
+        
+        HexCell cell = _Cells[i] = Instantiate<HexCell>(_HexGridSettings.cellPrefab);
+        _Cells2D[x][y] = cell;
+        cell.transform.SetParent(transform, false);
+        cell.transform.localPosition = position;
+        cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, y);
+        cell.SetCellType(cellType);
+        cell.SetOrderInLayer(_HexGridSettings.width - y);
+        _CellsDictionary.Add(cell.coordinates, cell);
+
+        if (_HexGridSettings.showLabels)
+        {
+            Text label = Instantiate<Text>(_HexGridSettings.cellLabelPrefab);
+            label.rectTransform.SetParent(_GridCanvas.transform, false);
+            label.rectTransform.anchoredPosition = new Vector2(position.x, position.y);
+            label.text = cell.coordinates.ToStringOnSeparateLines();   
+        }
+    }
+    
     public static HexCell GetCell(Vector2 worldPosition)
     {
         var smallestPositionDifference = Mathf.Infinity;
@@ -116,7 +142,6 @@ public class HexGrid : MonoBehaviour
 
     [SerializeField] private GameInput _GameInput;
     [SerializeField] private HexGridSettings _HexGridSettings;
-    [SerializeField] private GameObject _GridBackground;
 
     #endregion Inspector Variables
 
@@ -125,33 +150,24 @@ public class HexGrid : MonoBehaviour
     
     private void Awake ()
     {
-        _InputHandler = new HexGridInputHandler(_GameInput.currentInput, this);
-        
         _GridCanvas = GetComponentInChildren<Canvas>();
         
         _Cells = new HexCell[_HexGridSettings.height * _HexGridSettings.width];
         _Cells2D = new HexCell[_HexGridSettings.width][];
+        
         for (var i = 0; i < _HexGridSettings.width; i++)
         {
             _Cells2D[i] = new HexCell[_HexGridSettings.height];
         }
         
         centerPosition = new Vector3(widthInWorldCoordinates / 2f - HexMetrics.innerRadius, heightInWorldCoordinates / 2f - HexMetrics.outerRadius, transform.position.z);
-        
-        CreateGrid();
-    }
-
-    private void Update()
-    {
-        _InputHandler.HandleInput();
     }
 
     #endregion Unity Methods
 
 
     #region Private Variables
-
-    private HexGridInputHandler _InputHandler;
+    
     private HexGridPerlinNoiseGenerator _PerlinNoiseGenerator;
     private HexGridCityPlanner _HexGridCityPlanner;
     
@@ -165,32 +181,7 @@ public class HexGrid : MonoBehaviour
 
     #region Private Methods
 
-    private void CreateCell (int x, int y, int i, HexCell.ECellType cellType = HexCell.ECellType.Field) 
-    {
-        Vector3 position;
-        position.x = x * (HexMetrics.outerRadius * 1.5f);
-        position.y = (y + x * 0.5f - x / 2) * (HexMetrics.innerRadius * 2f);
-        position.z = 0f;
-        
-        HexCell cell = _Cells[i] = Instantiate<HexCell>(_HexGridSettings.cellPrefab);
-        _Cells2D[x][y] = cell;
-        cell.transform.SetParent(transform, false);
-        cell.transform.localPosition = position;
-        cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, y);
-        cell.SetCellType(cellType);
-        cell.UpdateOrderInLayer(_HexGridSettings.width - y);
-        _CellsDictionary.Add(cell.coordinates, cell);
-
-        if (_HexGridSettings.showLabels)
-        {
-            Text label = Instantiate<Text>(_HexGridSettings.cellLabelPrefab);
-            label.rectTransform.SetParent(_GridCanvas.transform, false);
-            label.rectTransform.anchoredPosition = new Vector2(position.x, position.y);
-            label.text = cell.coordinates.ToStringOnSeparateLines();   
-        }
-    }
-
-    private void CreateGrid()
+    public void CreateGrid()
     {
         _PerlinNoiseGenerator = new HexGridPerlinNoiseGenerator(_HexGridSettings);
         var noise = _PerlinNoiseGenerator.GenerateNoise(Random.Range(0, _HexGridSettings.seedRange),

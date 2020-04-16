@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using GenericEnums;
+using UnityEngine;
 
-public class HexGridInputHandler
+public class GameInputHandler
 {
     #region Public Types
 
@@ -14,19 +15,19 @@ public class HexGridInputHandler
 
     #region Public Methods
 
-    public HexGridInputHandler(
+    public GameInputHandler(
         IAmInput currentGameInput,
-        HexGrid hexGrid)
+        TurnManager turnManager)
     {
         _CurrentGameInput = currentGameInput;
-        _HexGrid = hexGrid;
+        _TurnManager = turnManager;
     }
 
     public void HandleInput()
     {
         if (_CurrentGameInput.SingleClick())
         {
-            HexGrid.SelectCellAction?.Invoke(HexGrid.GetCell(_CurrentGameInput.PointerWorldPosition()));
+            HexGrid.SelectCellAction?.Invoke(HexGrid.GetCell(_CurrentGameInput.PointerWorldPosition()), _TurnManager.CurrentTurn);
         }
     }
     
@@ -46,7 +47,7 @@ public class HexGridInputHandler
     #region Private Variables
 
     private IAmInput _CurrentGameInput;
-    private HexGrid _HexGrid;
+    private TurnManager _TurnManager;
 
     private Vector2 _InputStartPosition;
     private Vector2 _HexGridCameraStartPosition;

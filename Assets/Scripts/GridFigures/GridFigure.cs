@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using GenericEnums;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GridFigure : MonoBehaviour
 {
@@ -11,8 +13,10 @@ public class GridFigure : MonoBehaviour
 
     #region Public Variables
 
-    public GenericEnums.ESelectionState selectionState;
-    public GenericEnums.EConflictSide conflictSide;
+    public static UnityAction<GridFigure> FigureMoveAction; 
+    
+    public GenericEnums.ESelectionState selectionState { get; private set; }
+    public GenericEnums.EConflictSide conflictSide { get; private set; }
 
     #endregion Public Variables
 
@@ -35,8 +39,19 @@ public class GridFigure : MonoBehaviour
     {
         if (_MoveCoroutine == null)
         {
+            FigureMoveAction?.Invoke(this);
             _MoveCoroutine = StartCoroutine(MoveFigureCoroutine(hexCell));   
         }
+    }
+
+    public virtual void SetConflictSide(EConflictSide newConflictSide)
+    {
+        conflictSide = newConflictSide;
+    }
+
+    public virtual void SetHexCell(HexCell hexCell)
+    {
+        _MyHexCell = hexCell;
     }
 
     public virtual void ShowMovementRange(bool active)
@@ -64,6 +79,11 @@ public class GridFigure : MonoBehaviour
         }
     }
 
+    public virtual void IncreaseStrength()
+    {
+        FigureStrength += FigureStrengthIncreaseRate;
+    }
+
     #endregion Public Methods
 
 
@@ -72,6 +92,8 @@ public class GridFigure : MonoBehaviour
     [SerializeField] public int DefaultMovementRange = 2;
     [SerializeField] public int FigureStrength = 16;
     [SerializeField] public int FigureMorals = 8;
+
+    [SerializeField] public int FigureStrengthIncreaseRate = 16;
 
     #endregion Inspector Variables
 
@@ -86,11 +108,6 @@ public class GridFigure : MonoBehaviour
     private void OnDisable()
     {
         HexGrid.SelectCellAction -= OnHexCellSelected;
-    }
-
-    private void Start()
-    {
-        MoveFigure(HexGrid.GetCell(new HexCoordinates(5, 5)));
     }
 
     #endregion Unity Methods
@@ -110,37 +127,40 @@ public class GridFigure : MonoBehaviour
 
     #region Private Methods
 
-    private void OnHexCellSelected(HexCell hexCell)
+    private void OnHexCellSelected(HexCell hexCell, EConflictSide conflictSide)
     {
-        if (hexCell == _MyHexCell)
+        if (conflictSide == this.conflictSide)
         {
-            switch (selectionState)
+            if (hexCell == _MyHexCell)
             {
-                case GenericEnums.ESelectionState.Idle:
-                    Select();
-                    break;
-                
-                case GenericEnums.ESelectionState.Selected:
-                    Deselect();
-                    break;
-                
-                default:
-                    Select();
-                    break;
-            }
-        }
-        else
-        {
-            if (selectionState == GenericEnums.ESelectionState.Selected)
-            {
-                if (HexMetrics.Distance(_MyHexCell, hexCell) <= _CurrentMovementRange && hexCell.showingMovementAvailability)
+                switch (selectionState)
                 {
-                    Deselect();
-                    MoveFigure(hexCell);
-                }
+                    case GenericEnums.ESelectionState.Idle:
+                        Select();
+                        break;
                 
-                Deselect();
+                    case GenericEnums.ESelectionState.Selected:
+                        Deselect();
+                        break;
+                
+                    default:
+                        Select();
+                        break;
+                }
             }
+            else
+            {
+                if (selectionState == GenericEnums.ESelectionState.Selected)
+                {
+                    if (HexMetrics.Distance(_MyHexCell, hexCell) <= _CurrentMovementRange && hexCell.showingMovementAvailability)
+                    {
+                        Deselect();
+                        MoveFigure(hexCell);
+                    }
+                
+                    Deselect();
+                }
+            }   
         }
     }
 
@@ -166,7 +186,17 @@ public class GridFigure : MonoBehaviour
         
         transform.parent = hexCell.transform;
         _MyHexCell.Deselect();
-
+        _MyHexCell.SetConflictSide(conflictSide);
+        
+        var allNewNeighbours = HexMetrics.GetAllNeighbours(_MyHexCell);
+        foreach (var newNeighbour in allNewNeighbours)
+        {
+            if (newNeighbour.cellType != HexCell.ECellType.City)
+            {
+                newNeighbour.SetConflictSide(conflictSide);   
+            }
+        }
+        
         _MoveCoroutine = null;
     }
     
