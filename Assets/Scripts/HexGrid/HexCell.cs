@@ -30,6 +30,8 @@ public class HexCell : MonoBehaviour
     public GenericEnums.ESelectionState selectionState;
     public ELocomotionState locomotionState;
     public GenericEnums.EConflictSide conflictSide;
+
+    public int orderInRenderingLayer { get; private set; }
     
     public bool showingMovementAvailability { get; private set; }
 
@@ -72,40 +74,59 @@ public class HexCell : MonoBehaviour
         switch (cellType)
         {
             case ECellType.Field:
-                _MySpriteRenderer.color = cellSettings.fieldColor;
+                //_MySpriteRenderer.color = cellSettings.fieldColor;
+                _MySpriteRenderer.sprite = cellSettings.fieldSprite;
                 locomotionState = ELocomotionState.Walkable;
                 break;
             
             case ECellType.Water:
-                _MySpriteRenderer.color = cellSettings.waterColor;
+                //_MySpriteRenderer.color = cellSettings.waterColor;
+                _MySpriteRenderer.sprite = cellSettings.waterSprite;
                 locomotionState = ELocomotionState.Swimmingable;
                 break;
             
             case ECellType.DeepWater:
-                _MySpriteRenderer.color = cellSettings.deepWaterColor;
+                //_MySpriteRenderer.color = cellSettings.deepWaterColor;
+                _MySpriteRenderer.sprite = cellSettings.deepWaterSprite;
                 locomotionState = ELocomotionState.Swimmingable;
                 break;
             
             case ECellType.Forest:
-                _MySpriteRenderer.color = cellSettings.forestColor;
+                //_MySpriteRenderer.color = cellSettings.forestColor;
+                _MySpriteRenderer.sprite = cellSettings.forestSprite;
                 locomotionState = ELocomotionState.Walkable;
                 break;
             
             case ECellType.City:
-                _MySpriteRenderer.color = cellSettings.cityColor;
+                //_MySpriteRenderer.color = cellSettings.cityColor;
+                _MySpriteRenderer.sprite = cellSettings.citySprite;
                 locomotionState = ELocomotionState.Walkable;
                 break;
             
             case ECellType.Mountains:
-                _MySpriteRenderer.color = cellSettings.mountainsColor;
+                //_MySpriteRenderer.color = cellSettings.mountainsColor;
+                _MySpriteRenderer.sprite = cellSettings.mountainsSprite;
                 locomotionState = ELocomotionState.Blocked;
                 break;
             
             default:
-                _MySpriteRenderer.color = cellSettings.fieldColor;
+                //_MySpriteRenderer.color = cellSettings.fieldColor;
+                _MySpriteRenderer.sprite = cellSettings.fieldSprite;
                 locomotionState = ELocomotionState.Walkable;
                 break;
         }
+    }
+    
+    public void UpdateOrderInLayer(int orderInLayer)
+    {
+        if (cellType == ECellType.Water)
+            orderInLayer -= 2;
+        
+        orderInRenderingLayer = orderInLayer;
+        _MySpriteRenderer.sortingOrder = orderInLayer;
+
+        mySelectionHighlightObject.GetComponent<SpriteRenderer>().sortingOrder = orderInLayer + 1;
+        myMovementRangeHighlightObject.GetComponent<SpriteRenderer>().sortingOrder = orderInLayer + 1;
     }
     
     #endregion Public Methods
@@ -168,7 +189,7 @@ public class HexCell : MonoBehaviour
             Deselect();
         }
     }
-    
+
     #endregion Private Methods
 
 

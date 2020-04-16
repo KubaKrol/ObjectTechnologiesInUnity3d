@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &374617101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,6 +428,7 @@ MonoBehaviour:
   centerPosition: {x: 0, y: 0, z: 0}
   _GameInput: {fileID: 11400000, guid: 879322eb7cb2de445843ca6d1e3f0432, type: 2}
   _HexGridSettings: {fileID: 11400000, guid: dc40d4735bc837c4e89f124aad4ee34d, type: 2}
+  _GridBackground: {fileID: 0}
 --- !u!4 &918490720
 Transform:
   m_ObjectHideFlags: 0
@@ -480,7 +481,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -541,7 +542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _GameInput: {fileID: 11400000, guid: 879322eb7cb2de445843ca6d1e3f0432, type: 2}
   minCameraSize: 30
-  maxCameraSize: 150
+  maxCameraSize: 200
   zoomSensitivity: 3
 --- !u!1 &1451609126
 GameObject:

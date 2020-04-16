@@ -3,10 +3,10 @@
 [CreateAssetMenu(fileName = "HexCellsSettings", menuName = "HexGrid/HexCellsSettings")]
 public class HexCellSettings : ScriptableObject
 {
-    [SerializeField] public Color fieldColor;
-    [SerializeField] public Color waterColor;
-    [SerializeField] public Color deepWaterColor;
-    [SerializeField] public Color forestColor;
-    [SerializeField] public Color cityColor;
-    [SerializeField] public Color mountainsColor;
+    [SerializeField] public Sprite fieldSprite;
+    [SerializeField] public Sprite forestSprite;
+    [SerializeField] public Sprite deepWaterSprite;
+    [SerializeField] public Sprite waterSprite;
+    [SerializeField] public Sprite mountainsSprite;
+    [SerializeField] public Sprite citySprite;
 }

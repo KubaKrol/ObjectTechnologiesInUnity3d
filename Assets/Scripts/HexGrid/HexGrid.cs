@@ -116,6 +116,7 @@ public class HexGrid : MonoBehaviour
 
     [SerializeField] private GameInput _GameInput;
     [SerializeField] private HexGridSettings _HexGridSettings;
+    [SerializeField] private GameObject _GridBackground;
 
     #endregion Inspector Variables
 
@@ -159,8 +160,6 @@ public class HexGrid : MonoBehaviour
     private static Dictionary<HexCoordinates, HexCell> _CellsDictionary = new Dictionary<HexCoordinates, HexCell>();
     private Canvas _GridCanvas;
 
-    private Vector3 _CenterPosition;
-    
     #endregion Private Variables
 
 
@@ -179,6 +178,7 @@ public class HexGrid : MonoBehaviour
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, y);
         cell.SetCellType(cellType);
+        cell.UpdateOrderInLayer(_HexGridSettings.width - y);
         _CellsDictionary.Add(cell.coordinates, cell);
 
         if (_HexGridSettings.showLabels)
@@ -193,32 +193,33 @@ public class HexGrid : MonoBehaviour
     private void CreateGrid()
     {
         _PerlinNoiseGenerator = new HexGridPerlinNoiseGenerator(_HexGridSettings);
-        var noise = _PerlinNoiseGenerator.GenerateNoise(Random.Range(0, _HexGridSettings.seedRange), _HexGridSettings.xMultiplier, _HexGridSettings.yMultiplier);
-        
-        for (int y = 0, i = 0; y < _HexGridSettings.height; y++) 
+        var noise = _PerlinNoiseGenerator.GenerateNoise(Random.Range(0, _HexGridSettings.seedRange),
+            _HexGridSettings.xMultiplier, _HexGridSettings.yMultiplier);
+
+        for (int y = 0, i = 0; y < _HexGridSettings.height; y++)
         {
-            for (int x = 0; x < _HexGridSettings.width; x++) 
+            for (int x = 0; x < _HexGridSettings.width; x++)
             {
-                if (noise[y][x] < 0.1f)
+                if (noise[y][x] < 0.05f)
                 {
                     CreateCell(x, y, i++, HexCell.ECellType.DeepWater);
                 }
-                
-                if (noise[y][x] >= 0.1f && noise[y][x] < 0.3f)
+
+                if (noise[y][x] >= 0.05f && noise[y][x] < 0.3f)
                 {
-                    CreateCell(x, y, i++, HexCell.ECellType.Water);     
+                    CreateCell(x, y, i++, HexCell.ECellType.Water);
                 }
 
                 if (noise[y][x] >= 0.3f && noise[y][x] < 0.55f)
                 {
                     CreateCell(x, y, i++, HexCell.ECellType.Field);
                 }
-                
+
                 if (noise[y][x] >= 0.55f && noise[y][x] < 0.75f)
                 {
                     CreateCell(x, y, i++, HexCell.ECellType.Forest);
                 }
-                
+
                 if (noise[y][x] >= 0.75f)
                 {
                     CreateCell(x, y, i++, HexCell.ECellType.Mountains);
@@ -229,10 +230,10 @@ public class HexGrid : MonoBehaviour
         if (_HexGridSettings.runCityPlanner)
         {
             _HexGridCityPlanner = new HexGridCityPlanner(_HexGridSettings);
-            _HexGridCityPlanner.RunCityPlanner();   
+            _HexGridCityPlanner.RunCityPlanner();
         }
     }
-    
+
     #endregion Private Methods
 
 

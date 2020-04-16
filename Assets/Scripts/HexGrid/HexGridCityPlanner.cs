@@ -26,7 +26,6 @@ public class HexGridCityPlanner
             Debug.LogError("City planner cannot work on grids smaller than 12x12");
         }
         
-        PlaceCapitols();
         PlaceCities();
     }
     
@@ -56,7 +55,7 @@ public class HexGridCityPlanner
     {
         var width = _HexGridSettings.width;
         var height = _HexGridSettings.height;
-        var offset = _HexGridSettings.DefaultCapitolCornerOffset;
+        var offset = _HexGridSettings.CitiesOffset;
 
         Vector2[] positions =
         {
@@ -79,46 +78,33 @@ public class HexGridCityPlanner
     {
         var width = _HexGridSettings.width;
         var height = _HexGridSettings.height;
+        var offset = _HexGridSettings.CitiesOffset + 1;
         
-        /*var amountOfCellsInQuarter = (width / 2) * (height / 2);
-        var cityOffset = Mathf.Ceil(amountOfCellsInQuarter / ((float)_HexGridSettings.CitiesPerQuarter));*/
-        
-        //first quarter
-        DistributeCitiesPerQuarter(0, 0, width / 2, height / 2);
-        
-        //second quarter
-        DistributeCitiesPerQuarter((width / 2) - 1, (height / 2) - 1, width - 1, height - 1);
-        
-        //third quarter
-        DistributeCitiesPerQuarter(0, (height / 2) - 1, width / 2, height - 1);
-    }
-
-    private void DistributeCitiesPerQuarter(int start_x_index, int start_y_index, int end_x_index, int end_y_index)
-    {
-        var width = end_x_index - start_x_index;
-        var height = end_y_index - start_y_index;
-
-        var amountOfCellsInQuarter = width * height;
-        var cityOffset = amountOfCellsInQuarter / _HexGridSettings.CitiesPerQuarter;
-
-        for (int i = start_x_index, x = 0; i <= end_x_index; i++)
+        Vector2[] positionsImmuneToReplacement =
         {
-            for (int j = start_y_index; j <= end_y_index; j++, x++)
+            new Vector2(offset, offset),
+            new Vector2(width - offset - 1, offset),
+            new Vector2(width - offset - 1, height - offset - 1),
+            new Vector2(offset, height - offset - 1)
+        };
+        
+        for (int i = 1; i < _HexGridSettings.width; i++)
+        {
+            for (int j = 1; j < _HexGridSettings.height; j++)
             {
-                if (x % cityOffset == 0 && x != 0 && x != amountOfCellsInQuarter)
+                if (j % offset == 0 && i % offset == 0)
                 {
-                    var selectedCell = HexGrid.GetCell(i, j);
+                    var selectedCell = HexGrid.GetCell(i - 1, j - 1);
                     var newCityNeighbors = HexMetrics.GetAllNeighbours(selectedCell);
                     var randomNeighbor = Random.Range(0, newCityNeighbors.Length);
 
                     newCityNeighbors[randomNeighbor].SetCellType(HexCell.ECellType.City);
                     UnblockCell(newCityNeighbors[randomNeighbor]);
                 }
-                
-                //HexGrid.GetCell(i, j).ShowMovementAvailability(true);
             }
         }
     }
+    
 
     private void UnblockCell(HexCell hexCell)
     {

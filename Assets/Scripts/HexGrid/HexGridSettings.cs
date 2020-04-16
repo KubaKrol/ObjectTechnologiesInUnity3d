@@ -44,8 +44,7 @@ public class HexGridSettings : ScriptableObject
     
     [SerializeField] public bool runCityPlanner;
 
-    [SerializeField] public int DefaultCapitolCornerOffset = 3;
-    [SerializeField] public int CitiesPerQuarter = 5;
+    [SerializeField] public int CitiesOffset = 3;
 
     #endregion Inspector Variables
 

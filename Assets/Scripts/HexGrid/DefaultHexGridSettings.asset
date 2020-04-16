@@ -16,12 +16,11 @@ MonoBehaviour:
     type: 3}
   cellLabelPrefab: {fileID: 1334843212886382290, guid: 5c01d4ad5d396334da69f1fe37a2f93f,
     type: 3}
-  width: 28
-  height: 20
+  width: 27
+  height: 27
   showLabels: 0
   xMultiplier: 0.2
   yMultiplier: 0.2
   seedRange: 1000
-  runCityPlanner: 1
-  DefaultCapitolCornerOffset: 2
-  CitiesPerQuarter: 5
+  runCityPlanner: 0
+  CitiesOffset: 3

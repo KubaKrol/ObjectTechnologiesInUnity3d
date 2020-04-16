@@ -93,10 +93,6 @@ public class GameCamera : MonoBehaviour
         _TargetOrthographicSize = _CameraComponent.orthographicSize;
         _TargetPosition = transform.position;
     }
-    
-    private void Start()
-    {
-    }
 
     private void Update()
     {
