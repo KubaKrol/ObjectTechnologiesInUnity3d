@@ -4,14 +4,8 @@
     <list default="true" id="fc56e991-508f-44e9-b91e-a159c872880a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/HexGrid/HexCell.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/HexGrid/HexCell.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/GameCamera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/GameCamera.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/DefaultHexGridSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/DefaultHexGridSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCoordinates.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCoordinates.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridCityPlanner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridCityPlanner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridSettings.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +23,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../UnityProjects/Assets/Scripts/Code/Other/EventManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/DefaultHexGridSettings.asset" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/DefaultHexCellsSettings.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridFigures/FlyingFigure.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" root0="FORCE_HIGHLIGHTING" />
@@ -48,6 +43,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Input/IAmInput.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/UnityProjects/RogueBall/Assets/Scripts/Input/GameInput.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridCityPlanner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Prefabs/HexGrid/HexCell.prefab" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -69,7 +65,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GridFigures/FlyingFigure.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridPerlinNoiseGenerator.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCoordinates.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridCityPlanner.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" />
@@ -77,6 +72,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCoordinates.cs" />
       </list>
     </option>
   </component>
@@ -137,6 +133,7 @@
       <workItem from="1586887894262" duration="8427000" />
       <workItem from="1586900849926" duration="5851000" />
       <workItem from="1586963524785" duration="6762000" />
+      <workItem from="1587058179767" duration="1628000" />
     </task>
     <servers />
   </component>

@@ -168,8 +168,8 @@ public class HexGrid : MonoBehaviour
     private void CreateCell (int x, int y, int i, HexCell.ECellType cellType = HexCell.ECellType.Field) 
     {
         Vector3 position;
-        position.x = (x + y * 0.5f - y / 2) * (HexMetrics.innerRadius * 2f);
-        position.y = y * (HexMetrics.outerRadius * 1.5f);
+        position.x = x * (HexMetrics.outerRadius * 1.5f);
+        position.y = (y + x * 0.5f - x / 2) * (HexMetrics.innerRadius * 2f);
         position.z = 0f;
         
         HexCell cell = _Cells[i] = Instantiate<HexCell>(_HexGridSettings.cellPrefab);
