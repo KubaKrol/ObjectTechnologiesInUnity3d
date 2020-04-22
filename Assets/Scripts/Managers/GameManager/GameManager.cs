@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _GameCamera.SetTargetPosition(_HexGrid.centerPosition);
-        
         _TurnManager.InitializeFirstTurn();
     }
 

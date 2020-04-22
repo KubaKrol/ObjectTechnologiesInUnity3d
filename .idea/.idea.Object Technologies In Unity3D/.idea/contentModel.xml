@@ -26,6 +26,9 @@
           <e p="GridFigures" t="Include">
             <e p="FlyingFigure.cs" t="Include" />
             <e p="GridFigure.cs" t="Include" />
+            <e p="GridFigureGUI" t="Include">
+              <e p="FigureStats.cs" t="Include" />
+            </e>
             <e p="WalkingFigure.cs" t="Include" />
           </e>
           <e p="HexGrid" t="Include">
@@ -55,6 +58,10 @@
               <e p="PlayerSettings.cs" t="Include" />
             </e>
             <e p="TurnManager.cs" t="Include" />
+          </e>
+          <e p="Memento" t="Include">
+            <e p="MementoCaretaker.cs" t="Include" />
+            <e p="TurnMemento.cs" t="Include" />
           </e>
         </e>
         <e p="TextMesh Pro" t="Include">

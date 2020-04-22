@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GenericEnums;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class HexGridCityPlanner
 {
@@ -76,12 +78,19 @@ public class HexGridCityPlanner
             newCityCell.SetCellType(HexCell.ECellType.City);
             UnblockCell(newCityCell);
 
-            var allNeighbours = HexMetrics.GetAllNeighbours(newCityCell);
+            var allNeighbours = newCityCell.neighbourCells;
 
             foreach (var neighbour in allNeighbours)
             {
                 neighbour.SetConflictSide((EConflictSide)i+1);
             }
+
+            foreach (var neighbour in allNeighbours)
+            {
+                neighbour.CheckBorders();
+            }
+            
+            newCityCell.CheckBorders();
         }
     }
 
@@ -91,6 +100,7 @@ public class HexGridCityPlanner
         var height = _HexGridSettings.height;
         var offset = _HexGridSettings.CitiesOffset + 1;
         
+        //Capitols positions, cities should avoid these since there are already cities placed.
         Vector2[] positionsImmuneToReplacement =
         {
             new Vector2(offset, offset),
@@ -105,8 +115,24 @@ public class HexGridCityPlanner
             {
                 if (j % offset == 0 && i % offset == 0)
                 {
+                    var skipIteration = false;
+                    
+                    for (int n = 0; n < positionsImmuneToReplacement.Length; n++)
+                    {
+                        if (Math.Abs(i - positionsImmuneToReplacement[n].x) < 3 && Math.Abs(j - positionsImmuneToReplacement[n].y) < 3)
+                        {
+                            skipIteration = true;
+                            break;
+                        }                        
+                    }
+
+                    if (skipIteration)
+                    {
+                        continue;
+                    }
+                
                     var selectedCell = HexGrid.GetCell(i - 1, j - 1);
-                    var newCityNeighbors = HexMetrics.GetAllNeighbours(selectedCell);
+                    var newCityNeighbors = selectedCell.neighbourCells;
                     var randomNeighbor = Random.Range(0, newCityNeighbors.Length);
 
                     var newCityHexCell = newCityNeighbors[randomNeighbor];
@@ -122,7 +148,7 @@ public class HexGridCityPlanner
     {
         var amountOfUnwalkableCells = 0;
 
-        var allNeighbours = HexMetrics.GetAllNeighbours(hexCell);
+        var allNeighbours = hexCell.neighbourCells;
 
         for (var i = 0; i < allNeighbours.Length; i++)
         {

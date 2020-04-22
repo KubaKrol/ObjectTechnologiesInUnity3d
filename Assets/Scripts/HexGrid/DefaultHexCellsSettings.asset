@@ -12,9 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5244adae4e0e64395597e8a1ef6068, type: 3}
   m_Name: DefaultHexCellsSettings
   m_EditorClassIdentifier: 
-  fieldSprite: {fileID: 21300000, guid: 24075c76516975048880c71176f6b1a0, type: 3}
-  forestSprite: {fileID: 21300000, guid: 458770ec454bf3e418d09309606df474, type: 3}
+  fieldSprite: {fileID: 21300000, guid: 55f8a4da94778ed4392efda1fb47d5ba, type: 3}
+  forestSprite: {fileID: 21300000, guid: a52de981dbf1ae949865f30a1cacd197, type: 3}
+  denseForestSprite: {fileID: 21300000, guid: a12e1a5981f6c3a44a87211084e510c3, type: 3}
   deepWaterSprite: {fileID: 21300000, guid: 2f0057d9ded7b684592d473df959b7b4, type: 3}
-  waterSprite: {fileID: 21300000, guid: 605ba509907ff794785e1224e4f68336, type: 3}
-  mountainsSprite: {fileID: 21300000, guid: 8495c449d637a4446b1b29ca7bd7059c, type: 3}
+  waterSprite: {fileID: 21300000, guid: 39e87ff4ea98c3a4fbd9b7c3a2435e4c, type: 3}
+  mountainsSprite: {fileID: 21300000, guid: 2d8c4d18683a1b2428170baae2cd4f1b, type: 3}
+  highMountainSprite: {fileID: 21300000, guid: 233f755ed25ee4244957b1db863b5dbd, type: 3}
   citySprite: {fileID: 21300000, guid: 18b3b8e981d9a714795d27fff329c6c3, type: 3}
+  borderSprites:
+  - {fileID: 21300000, guid: 15696814830017a4e9081a6bc014b08c, type: 3}
+  - {fileID: 21300000, guid: 05e9742b7b31d274e9d03cae9a6a14b7, type: 3}
+  - {fileID: 21300000, guid: 2218226126fb6fb48ac9625e5aef248e, type: 3}
+  - {fileID: 21300000, guid: 271dc813d3ee1b046b27c771218acb31, type: 3}
+  - {fileID: 21300000, guid: 2d3f15059af35154c9592f568638c540, type: 3}
+  - {fileID: 21300000, guid: c3c5c0eb3703989499c93cba90da816c, type: 3}

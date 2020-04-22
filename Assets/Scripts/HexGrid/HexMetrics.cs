@@ -25,30 +25,28 @@ public static class HexMetrics
     public static HexCell[] GetAllNeighbours(HexCell hexCell)
     {
         HexCell[] neighbours;
-        int amountOfNeighbours = 0;
 
         HexCoordinates[] directions =
         {
-            new HexCoordinates(hexCell.coordinates.X + 1, hexCell.coordinates.Y), new HexCoordinates(hexCell.coordinates.X + 1, hexCell.coordinates.Y - 1), new HexCoordinates(hexCell.coordinates.X , hexCell.coordinates.Y - 1),
-            new HexCoordinates(hexCell.coordinates.X - 1, hexCell.coordinates.Y), new HexCoordinates(hexCell.coordinates.X - 1, hexCell.coordinates.Y + 1), new HexCoordinates(hexCell.coordinates.X , hexCell.coordinates.Y + 1),
+            new HexCoordinates(hexCell.coordinates.X , hexCell.coordinates.Y + 1),
+            new HexCoordinates(hexCell.coordinates.X + 1, hexCell.coordinates.Y),        
+            new HexCoordinates(hexCell.coordinates.X + 1, hexCell.coordinates.Y - 1),
+            new HexCoordinates(hexCell.coordinates.X , hexCell.coordinates.Y - 1),
+            new HexCoordinates(hexCell.coordinates.X - 1, hexCell.coordinates.Y),
+            new HexCoordinates(hexCell.coordinates.X - 1, hexCell.coordinates.Y + 1),
         };
+
+        neighbours = new HexCell[6];
         
         for (int i = 0; i < 6; i++)
         {
             if (HexGrid.GetCell(directions[i]) != null)
             {
-                amountOfNeighbours++;
+                neighbours[i] = HexGrid.GetCell(directions[i]);
             }
-        }
-        
-        neighbours = new HexCell[amountOfNeighbours];
-
-        for (int i = 0, x = 0; i < 6; i++)
-        {
-            if (HexGrid.GetCell(directions[i]) != null)
+            else
             {
-                neighbours[x] = HexGrid.GetCell(directions[i]);
-                x++;
+                neighbours[i] = null;
             }
         }
 

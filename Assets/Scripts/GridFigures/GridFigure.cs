@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class GridFigure : MonoBehaviour
 {
     #region Public Types
-
+    
     #endregion Public Types
 
 
@@ -39,7 +39,6 @@ public class GridFigure : MonoBehaviour
     {
         if (_MoveCoroutine == null)
         {
-            FigureMoveAction?.Invoke(this);
             _MoveCoroutine = StartCoroutine(MoveFigureCoroutine(hexCell));   
         }
     }
@@ -47,6 +46,7 @@ public class GridFigure : MonoBehaviour
     public virtual void SetConflictSide(EConflictSide newConflictSide)
     {
         conflictSide = newConflictSide;
+        _MySpriteRenderer.color = _GameSettings.GetConflictSideColor(conflictSide);
     }
 
     public virtual void SetHexCell(HexCell hexCell)
@@ -89,11 +89,18 @@ public class GridFigure : MonoBehaviour
 
     #region Inspector Variables
 
+    [Header("Settings")]
+    
     [SerializeField] public int DefaultMovementRange = 2;
     [SerializeField] public int FigureStrength = 16;
     [SerializeField] public int FigureMorals = 8;
 
     [SerializeField] public int FigureStrengthIncreaseRate = 16;
+
+    [Header("Dependencies")] 
+    
+    [SerializeField] private GameSettings _GameSettings;
+    [SerializeField] private SpriteRenderer _MySpriteRenderer;
 
     #endregion Inspector Variables
 
@@ -187,15 +194,21 @@ public class GridFigure : MonoBehaviour
         transform.parent = hexCell.transform;
         _MyHexCell.Deselect();
         _MyHexCell.SetConflictSide(conflictSide);
-        
-        var allNewNeighbours = HexMetrics.GetAllNeighbours(_MyHexCell);
-        foreach (var newNeighbour in allNewNeighbours)
+
+        var allNewNeighbours = _MyHexCell.neighbourCells;
+
+        for (int i = 0; i < 6; i++)
         {
-            if (newNeighbour.cellType != HexCell.ECellType.City)
+            if (allNewNeighbours[i] != null)
             {
-                newNeighbour.SetConflictSide(conflictSide);   
+                if (allNewNeighbours[i].cellType != HexCell.ECellType.City)
+                {
+                    allNewNeighbours[i].SetConflictSide(conflictSide);
+                }
             }
         }
+
+        FigureMoveAction?.Invoke(this);
         
         _MoveCoroutine = null;
     }

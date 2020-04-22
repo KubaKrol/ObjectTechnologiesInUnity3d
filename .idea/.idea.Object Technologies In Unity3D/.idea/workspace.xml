@@ -4,21 +4,47 @@
     <list default="true" id="fc56e991-508f-44e9-b91e-a159c872880a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GridFigures/WalkingGridFigure.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/GridFigures/WalkingGridFigure.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/HexGrid/HexCell.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/HexGrid/HexCell.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums/GenericEnums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/GenericEnums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/CustomHexGridSettings.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/CustomHexGridSettings.asset.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/DefaultHexCellsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/DefaultHexCellsSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/DefaultHexGridSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/DefaultHexGridSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridCityPlanner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridCityPlanner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridInputHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridInputHandler.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/city.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/city.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/conflictSide.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/conflictSide.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/deepWater.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/deepWater.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/field.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/field.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/field_3d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/field_3d.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/forest.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/forest.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/forest_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/forest_01.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/forest_basic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/forest_basic.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/hexCell.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/hexCell.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/mountain_basic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/mountain_basic.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/mountains.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/mountains.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/mountains_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/mountains_01.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/transparent-hexagon-9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/transparent-hexagon-9.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/transparent-hexagon-9_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/transparent-hexagon-9_white.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/water.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/water.png.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +55,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Memento/TurnMemento.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Editor/HexCoordinatesDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Input/MouseInput.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/PlayerManager/Player.cs" root0="FORCE_HIGHLIGHTING" />
@@ -42,6 +69,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Input/GameInput.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Memento/MementoCaretaker.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameCanvas/GameCanvas.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" root0="FORCE_HIGHLIGHTING" />
@@ -51,6 +79,7 @@
     <setting file="file://D:/UnityProjects/RogueBall/Assets/Scripts/Ballas/BallasInputController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigureGUI/FigureStats.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/PlayerManager/PlayerSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Input/GameInputHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Camera/GameCameraInputHandler.cs" root0="FORCE_HIGHLIGHTING" />
@@ -83,8 +112,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Input/MouseInput.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GridFigures/FlyingFigure.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridPerlinNoiseGenerator.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Camera/GameCamera.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCoordinates.cs" />
@@ -98,15 +125,24 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Input/GameInputHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager/GameSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameCanvas/GameCanvas.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridCityPlanner.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/PlayerManager/Player.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/PlayerManager/PlayerManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/City.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/TurnManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCellSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGrid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexMetrics.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigureMemento.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/TurnMemento.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Memento/IAmMemento.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Memento/IUseMemento.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexCell.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Memento/MementoCaretaker.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Memento/TurnMemento.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridCityPlanner.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigureGUI/FigureStats.cs" />
       </list>
     </option>
   </component>
@@ -169,6 +205,12 @@
       <workItem from="1586963524785" duration="6762000" />
       <workItem from="1587058179767" duration="7347000" />
       <workItem from="1587071578308" duration="6069000" />
+      <workItem from="1587115656335" duration="1731000" />
+      <workItem from="1587144412686" duration="2346000" />
+      <workItem from="1587154710314" duration="351000" />
+      <workItem from="1587289585992" duration="6759000" />
+      <workItem from="1587376499927" duration="1281000" />
+      <workItem from="1587541062351" duration="1954000" />
     </task>
     <servers />
   </component>
@@ -195,14 +237,14 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1074" y="401" key="RiderGenerateDialog/0.0.2560.1400/2560.0.1080.1880@0.0.2560.1400" timestamp="1587063667238" />
-    <state width="498" height="445" key="SwitcherDM" timestamp="1587075719875">
+    <state width="498" height="445" key="SwitcherDM" timestamp="1587545664303">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="498" height="445" key="SwitcherDM/0.0.2560.1400/2560.0.1080.1880@0.0.2560.1400" timestamp="1587075719875" />
-    <state x="936" y="330" key="run.anything.popup" timestamp="1586881982036">
+    <state width="498" height="445" key="SwitcherDM/0.0.2560.1400/2560.0.1080.1880@0.0.2560.1400" timestamp="1587545664303" />
+    <state x="936" y="330" key="run.anything.popup" timestamp="1587316591042">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="936" y="330" key="run.anything.popup/0.0.2560.1400/2560.0.1080.1880@0.0.2560.1400" timestamp="1586881982036" />
+    <state x="936" y="330" key="run.anything.popup/0.0.2560.1400/2560.0.1080.1880@0.0.2560.1400" timestamp="1587316591042" />
     <state x="936" y="353" width="672" height="676" key="search.everywhere.popup" timestamp="1587074733291">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

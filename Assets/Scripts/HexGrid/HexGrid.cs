@@ -61,7 +61,7 @@ public class HexGrid : MonoBehaviour
 
     #region Public Methods
 
-    public void CreateCell (int x, int y, int i, HexCell.ECellType cellType = HexCell.ECellType.Field) 
+    public void CreateCell (int x, int y, int i, float noiseValue, HexCell.ECellType cellType = HexCell.ECellType.Field) 
     {
         Vector3 position;
         position.x = x * (HexMetrics.outerRadius * 1.5f);
@@ -73,6 +73,7 @@ public class HexGrid : MonoBehaviour
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, y);
+        cell.SetNoiseValue(noiseValue);
         cell.SetCellType(cellType);
         cell.SetOrderInLayer(_HexGridSettings.width - y);
         _CellsDictionary.Add(cell.coordinates, cell);
@@ -135,6 +136,11 @@ public class HexGrid : MonoBehaviour
         return null;
     }
 
+    public static HexCell[] GetAllCells()
+    {
+        return _Cells;
+    }
+
     #endregion Public Methods
 
 
@@ -193,27 +199,27 @@ public class HexGrid : MonoBehaviour
             {
                 if (noise[y][x] < 0.05f)
                 {
-                    CreateCell(x, y, i++, HexCell.ECellType.DeepWater);
+                    CreateCell(x, y, i++, noise[y][x], HexCell.ECellType.DeepWater);
                 }
 
                 if (noise[y][x] >= 0.05f && noise[y][x] < 0.3f)
                 {
-                    CreateCell(x, y, i++, HexCell.ECellType.Water);
+                    CreateCell(x, y, i++, noise[y][x], HexCell.ECellType.Water);
                 }
 
                 if (noise[y][x] >= 0.3f && noise[y][x] < 0.55f)
                 {
-                    CreateCell(x, y, i++, HexCell.ECellType.Field);
+                    CreateCell(x, y, i++, noise[y][x], HexCell.ECellType.Field);
                 }
 
                 if (noise[y][x] >= 0.55f && noise[y][x] < 0.75f)
                 {
-                    CreateCell(x, y, i++, HexCell.ECellType.Forest);
+                    CreateCell(x, y, i++, noise[y][x], HexCell.ECellType.Forest);
                 }
 
                 if (noise[y][x] >= 0.75f)
                 {
-                    CreateCell(x, y, i++, HexCell.ECellType.Mountains);
+                    CreateCell(x, y, i++, noise[y][x], HexCell.ECellType.Mountains);
                 }
             }
         }
