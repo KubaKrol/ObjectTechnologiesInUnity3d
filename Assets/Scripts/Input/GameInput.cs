@@ -13,14 +13,14 @@ public class GameInput : ScriptableObject
             }
             else
             {
-                #if UNITY_EDITOR
-                InitializeMouseInput();                
-                #endif
-                
                 #if UNITY_ANDROID
                 InitializeMobileInput();
                 #endif
                 
+                #if UNITY_EDITOR
+                InitializeMouseInput();                
+                #endif
+
                 return _CurrentGameInput;
             }
         }

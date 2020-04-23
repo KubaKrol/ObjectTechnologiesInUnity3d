@@ -2,20 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc56e991-508f-44e9-b91e-a159c872880a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Object Technologies In Unity3D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GridFigures/WalkingGridFigure.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/GridFigures/WalkingGridFigure.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/City.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/City.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameCanvas/GameCanvas.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameCanvas/GameCanvas.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigure.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigureGUI/FigureStats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridFigures/GridFigureGUI/FigureStats.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/DefaultHexCellsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/DefaultHexCellsSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridCityPlanner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridCityPlanner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Input/GameInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Input/GameInputHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/PlayerManager/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/PlayerManager/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/TurnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/TurnManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Input/GameInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Input/GameInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,13 +58,13 @@
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/HexGrid/HexCell.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/City.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.meta" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/GameManager/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Editor/HexCoordinatesDrawer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Input/GameInput.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HexGrid/HexGridCamera.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerInputHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
@@ -117,6 +109,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/GameCanvas/GameCanvas.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Input/MobileInput.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Input/GameInput.cs" />
+        <option value="$PROJECT_DIR$/Assets/Readme.txt" />
       </list>
     </option>
   </component>
@@ -186,7 +180,7 @@
       <workItem from="1587376499927" duration="1281000" />
       <workItem from="1587541062351" duration="2564000" />
       <workItem from="1587572365210" duration="8263000" />
-      <workItem from="1587628048393" duration="1201000" />
+      <workItem from="1587628048393" duration="2241000" />
     </task>
     <servers />
   </component>
