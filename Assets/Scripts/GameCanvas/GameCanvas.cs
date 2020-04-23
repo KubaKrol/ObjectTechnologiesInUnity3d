@@ -24,7 +24,8 @@ public class GameCanvas : MonoBehaviour
 
     #region Inspector Variables
 
-    [SerializeField] private TextMeshProUGUI currentTurnText;
+    [SerializeField] private TextMeshProUGUI _CurrentTurnText;
+    [SerializeField] private GameSettings _GameSettings;
     
     #endregion Inspector Variables
 
@@ -34,11 +35,13 @@ public class GameCanvas : MonoBehaviour
     private void OnEnable()
     {
         TurnManager.TurnChanged += OnTurnChanged;
+        GridFigure.FigureMoveAction += OnFigureMove;
     }
 
     private void OnDisable()
     {
         TurnManager.TurnChanged -= OnTurnChanged;
+        GridFigure.FigureMoveAction -= OnFigureMove;
     }
 
     #endregion Unity Methods
@@ -46,6 +49,8 @@ public class GameCanvas : MonoBehaviour
 
     #region Private Variables
 
+    private EConflictSide _CurrentConflictSide;
+    
     #endregion Private Variables
 
 
@@ -53,9 +58,16 @@ public class GameCanvas : MonoBehaviour
 
     private void OnTurnChanged(EConflictSide currentTurn)
     {
-        currentTurnText.text = currentTurn.ToString();
+        _CurrentConflictSide = currentTurn;
+        _CurrentTurnText.text = "Current turn: " + currentTurn + " moves left: " + PlayerManager.GetPlayer(currentTurn).movesLeft;
+        _CurrentTurnText.color = _GameSettings.GetConflictSideColor(currentTurn);
     }
-    
+
+    private void OnFigureMove(GridFigure movedFigure)
+    {
+        _CurrentTurnText.text = "Current turn: " + _CurrentConflictSide + " moves left: " + PlayerManager.GetPlayer(_CurrentConflictSide).movesLeft;
+    }
+
     #endregion Private Methods
 
 

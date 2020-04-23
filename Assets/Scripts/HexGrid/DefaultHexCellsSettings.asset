@@ -17,7 +17,7 @@ MonoBehaviour:
   denseForestSprite: {fileID: 21300000, guid: a12e1a5981f6c3a44a87211084e510c3, type: 3}
   deepWaterSprite: {fileID: 21300000, guid: 2f0057d9ded7b684592d473df959b7b4, type: 3}
   waterSprite: {fileID: 21300000, guid: 39e87ff4ea98c3a4fbd9b7c3a2435e4c, type: 3}
-  mountainsSprite: {fileID: 21300000, guid: 2d8c4d18683a1b2428170baae2cd4f1b, type: 3}
+  mountainsSprite: {fileID: 21300000, guid: bf31a1aa57144104bb5e9c12fd4702f2, type: 3}
   highMountainSprite: {fileID: 21300000, guid: 233f755ed25ee4244957b1db863b5dbd, type: 3}
   citySprite: {fileID: 21300000, guid: 18b3b8e981d9a714795d27fff329c6c3, type: 3}
   borderSprites:

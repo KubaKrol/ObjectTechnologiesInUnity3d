@@ -13,7 +13,14 @@ public class GameInput : ScriptableObject
             }
             else
             {
-                InitializeMouseInput();
+                #if UNITY_EDITOR
+                InitializeMouseInput();                
+                #endif
+                
+                #if UNITY_ANDROID
+                InitializeMobileInput();
+                #endif
+                
                 return _CurrentGameInput;
             }
         }
@@ -24,9 +31,9 @@ public class GameInput : ScriptableObject
         _CurrentGameInput = new MouseInput();
     }
 
-    public void InitializeTouchInput()
+    public void InitializeMobileInput()
     {
-        //todo
+        _CurrentGameInput = new MobileInput();
     }
 
     private IAmInput _CurrentGameInput;

@@ -14,6 +14,27 @@ public class Player
 
     public EConflictSide conflictSide { get; private set; }
     public List<GridFigure> gridFigures { get; private set; }
+
+    public int movesLeft
+    {
+        get
+        {
+            var movesLeft = 0;
+            
+            for (int i = 0; i < gridFigures.Count; i++)
+            {
+                if (gridFigures[i] != null)
+                {
+                    if (!gridFigures[i].MadeMoveThisTurn)
+                    {
+                        movesLeft++;
+                    }
+                }
+            }
+
+            return movesLeft;
+        }
+    }
     
     #endregion Public Variables
 
@@ -23,6 +44,8 @@ public class Player
     public Player(EConflictSide conflictSide)
     {
         this.conflictSide = conflictSide;
+        
+        GridFigure.FigureDestroyed += RemoveGridFigure;
     }
 
     public void AddGridFigure(GridFigure newGridFigure)
@@ -45,7 +68,17 @@ public class Player
 
     public int GetGridFiguresCount()
     {
-        return gridFigures.Count;
+        var amount = 0;
+
+        for (int i = 0; i < gridFigures.Count; i++)
+        {
+            if (gridFigures[i] != null)
+            {
+                amount++;
+            }
+        }
+
+        return amount;
     }
 
     #endregion Public Methods

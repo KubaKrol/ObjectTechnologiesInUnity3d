@@ -67,19 +67,24 @@ public class City : MonoBehaviour
             }
             else
             {
-                var newGridFigureObject = Instantiate(GameSettings.firstTierGridFigure);
-                newGridFigureObject.transform.position = _MyHexCell.transform.position;
-                newGridFigureObject.transform.parent = _MyHexCell.transform;
-
-                var newGridFigure = newGridFigureObject.GetComponent<GridFigure>();
-                newGridFigure.SetHexCell(_MyHexCell);
-                newGridFigure.SetConflictSide(_MyHexCell.conflictSide);
-                
-                PlayerManager.GetPlayer(_MyHexCell.conflictSide).AddGridFigure(newGridFigure);
+                CreateNewGridFigure();
             }   
         }
     }
-    
+
+    private void CreateNewGridFigure()
+    {
+        var newGridFigureObject = Instantiate(GameSettings.firstTierGridFigure);
+        newGridFigureObject.transform.position = _MyHexCell.transform.position;
+        newGridFigureObject.transform.parent = _MyHexCell.transform;
+
+        var newGridFigure = newGridFigureObject.GetComponent<GridFigure>();
+        newGridFigure.SetHexCell(_MyHexCell);
+        newGridFigure.SetConflictSide(_MyHexCell.conflictSide);
+                
+        PlayerManager.GetPlayer(_MyHexCell.conflictSide).AddGridFigure(newGridFigure);
+    }
+
     #endregion Private Methods
 
 

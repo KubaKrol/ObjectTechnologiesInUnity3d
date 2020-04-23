@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class FigureStats : MonoBehaviour
@@ -16,11 +18,17 @@ public class FigureStats : MonoBehaviour
 
     #region Public Methods
 
+    public void UpdateStats()
+    {
+        _StrengthText.text = _MyGridFigure.FigureStrength.ToString();
+    }
+    
     #endregion Public Methods
 
 
     #region Inspector Variables
 
+    [SerializeField] private TextMeshProUGUI _StrengthText;
     [SerializeField] private Transform _StatsPlaceholder;
     
     #endregion Inspector Variables
@@ -32,11 +40,6 @@ public class FigureStats : MonoBehaviour
     {
         _MyGridFigure = GetComponentInParent<GridFigure>();
         _MyCanvasGroup = GetComponent<CanvasGroup>();
-    }
-
-    private void Start()
-    {
-        Debug.Log(_MyGridFigure);
     }
 
     private void Update()

@@ -45,6 +45,7 @@
             <e p="GameInput.cs" t="Include" />
             <e p="GameInputHandler.cs" t="Include" />
             <e p="IAmInput.cs" t="Include" />
+            <e p="MobileInput.cs" t="Include" />
             <e p="MouseInput.cs" t="Include" />
           </e>
           <e p="Managers" t="Include">

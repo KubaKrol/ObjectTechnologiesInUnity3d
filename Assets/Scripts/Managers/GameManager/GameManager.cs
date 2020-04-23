@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
 
     #region Public Methods
 
+    public void NextTurn()
+    {
+        _TurnManager.NextTurn();
+    }
+    
     #endregion Public Methods
 
 

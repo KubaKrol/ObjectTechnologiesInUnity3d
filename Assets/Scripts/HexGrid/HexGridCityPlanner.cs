@@ -119,7 +119,7 @@ public class HexGridCityPlanner
                     
                     for (int n = 0; n < positionsImmuneToReplacement.Length; n++)
                     {
-                        if (Math.Abs(i - positionsImmuneToReplacement[n].x) < 3 && Math.Abs(j - positionsImmuneToReplacement[n].y) < 3)
+                        if (Math.Abs(i - positionsImmuneToReplacement[n].x) < 2 && Math.Abs(j - positionsImmuneToReplacement[n].y) < 2)
                         {
                             skipIteration = true;
                             break;

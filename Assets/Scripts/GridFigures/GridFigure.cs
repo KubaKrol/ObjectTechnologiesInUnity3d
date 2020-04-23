@@ -13,7 +13,12 @@ public class GridFigure : MonoBehaviour
 
     #region Public Variables
 
-    public static UnityAction<GridFigure> FigureMoveAction; 
+    public static bool FigureCurrentlyMoving;
+
+    public bool MadeMoveThisTurn { get; private set; }
+    
+    public static UnityAction<GridFigure> FigureMoveAction;
+    public static UnityAction<GridFigure> FigureDestroyed;
     
     public GenericEnums.ESelectionState selectionState { get; private set; }
     public GenericEnums.EConflictSide conflictSide { get; private set; }
@@ -79,9 +84,67 @@ public class GridFigure : MonoBehaviour
         }
     }
 
-    public virtual void IncreaseStrength()
+    public virtual void Merge(GridFigure allyFigure)
     {
-        FigureStrength += FigureStrengthIncreaseRate;
+        IncreaseStrength(allyFigure.FigureStrength);
+        allyFigure.Destroy();
+    }
+
+    public virtual void Attack(GridFigure opponent)
+    {
+        var damageFromOpponent = opponent.FigureStrength;
+
+        //TEMP SOLUTION
+        if (damageFromOpponent == FigureStrength)
+        {
+            if(UnityEngine.Random.value >= 0.5f)
+            {
+                opponent.GetDamage(FigureStrength);
+                GetDamage(FigureStrength - 1);
+            }
+            else
+            {
+                opponent.GetDamage(opponent.FigureStrength - 1);
+                GetDamage(damageFromOpponent);
+            }
+
+            return;
+        }
+        
+        opponent.GetDamage(FigureStrength);
+        GetDamage(damageFromOpponent);
+    }
+
+    public virtual void GetDamage(int damage)
+    {
+        FigureStrength -= damage;
+        _MyStats.UpdateStats();
+        
+        if (FigureStrength <= 0)
+        {
+            Destroy();
+        }
+    }
+
+    public virtual void Destroy()
+    {
+        transform.parent = null;
+        FigureDestroyed?.Invoke(this);
+        Destroy(gameObject);
+    }
+
+    public virtual void IncreaseStrength(int customValue = 0)
+    {
+        if (customValue == 0)
+        {
+            FigureStrength += FigureStrengthIncreaseRate;    
+        }
+        else
+        {
+            FigureStrength += customValue;
+        }
+        
+        _MyStats.UpdateStats();
     }
 
     #endregion Public Methods
@@ -101,6 +164,7 @@ public class GridFigure : MonoBehaviour
     
     [SerializeField] private GameSettings _GameSettings;
     [SerializeField] private SpriteRenderer _MySpriteRenderer;
+    [SerializeField] private FigureStats _MyStats;
 
     #endregion Inspector Variables
 
@@ -110,11 +174,18 @@ public class GridFigure : MonoBehaviour
     private void OnEnable()
     {
         HexGrid.SelectCellAction += OnHexCellSelected;
+        TurnManager.TurnsReset += ResetMovementStatus;
     }
 
     private void OnDisable()
     {
         HexGrid.SelectCellAction -= OnHexCellSelected;
+        TurnManager.TurnsReset -= ResetMovementStatus;
+    }
+
+    private void Start()
+    {
+        _MyStats.UpdateStats();
     }
 
     #endregion Unity Methods
@@ -128,7 +199,7 @@ public class GridFigure : MonoBehaviour
     protected Vector2 _MovingVelocity;
 
     protected int _CurrentMovementRange;
-    
+
     #endregion Private Variables
 
 
@@ -136,6 +207,9 @@ public class GridFigure : MonoBehaviour
 
     private void OnHexCellSelected(HexCell hexCell, EConflictSide conflictSide)
     {
+        if (MadeMoveThisTurn || FigureCurrentlyMoving)
+            return;
+        
         if (conflictSide == this.conflictSide)
         {
             if (hexCell == _MyHexCell)
@@ -148,10 +222,6 @@ public class GridFigure : MonoBehaviour
                 
                     case GenericEnums.ESelectionState.Selected:
                         Deselect();
-                        break;
-                
-                    default:
-                        Select();
                         break;
                 }
             }
@@ -171,6 +241,32 @@ public class GridFigure : MonoBehaviour
         }
     }
 
+    private void ClaimTerritory(HexCell hexCell)
+    {
+        if (hexCell.currentlyHeldFigure == this)
+        {
+            hexCell.SetConflictSide(conflictSide);
+
+            var allNeighbours = hexCell.neighbourCells;
+
+            for (int i = 0; i < 6; i++)
+            {
+                if (allNeighbours[i] != null)
+                {
+                    if (allNeighbours[i].cellType != HexCell.ECellType.City && allNeighbours[i].currentlyHeldFigure == null)
+                    {
+                        allNeighbours[i].SetConflictSide(conflictSide);
+                    }
+                }
+            }   
+        }
+    }
+
+    private void ResetMovementStatus()
+    {
+        MadeMoveThisTurn = false;
+    }
+
     #endregion Private Methods
 
 
@@ -178,9 +274,12 @@ public class GridFigure : MonoBehaviour
 
     private IEnumerator MoveFigureCoroutine(HexCell hexCell)
     {
-        _MyHexCell = hexCell;
+        FigureCurrentlyMoving = true;
         
         transform.parent = null;
+        _MyHexCell = hexCell;
+        
+        Deselect();
         
         while (Math.Abs(transform.position.x - hexCell.transform.position.x) > 0.05f ||
                Math.Abs(transform.position.y - hexCell.transform.position.y) > 0.05f)
@@ -192,25 +291,28 @@ public class GridFigure : MonoBehaviour
         }
         
         transform.parent = hexCell.transform;
-        _MyHexCell.Deselect();
-        _MyHexCell.SetConflictSide(conflictSide);
-
-        var allNewNeighbours = _MyHexCell.neighbourCells;
-
-        for (int i = 0; i < 6; i++)
+        MadeMoveThisTurn = true;
+        
+        if (hexCell.currentlyHeldFigure != null && hexCell.currentlyHeldFigure != this)
         {
-            if (allNewNeighbours[i] != null)
+            if (hexCell.currentlyHeldFigure.conflictSide != conflictSide)
             {
-                if (allNewNeighbours[i].cellType != HexCell.ECellType.City)
-                {
-                    allNewNeighbours[i].SetConflictSide(conflictSide);
-                }
+                Attack(hexCell.currentlyHeldFigure);   
+            }
+            else
+            {
+                Merge(hexCell.currentlyHeldFigure);
             }
         }
-
-        FigureMoveAction?.Invoke(this);
+        
+        ClaimTerritory(hexCell);
+        hexCell.Deselect();
         
         _MoveCoroutine = null;
+        
+        FigureMoveAction?.Invoke(this);
+
+        FigureCurrentlyMoving = false;
     }
     
     #endregion Coroutines

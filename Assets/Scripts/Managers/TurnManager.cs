@@ -38,14 +38,11 @@ public class TurnManager
     public void SetTurn(EConflictSide conflictSide)
     {
         CurrentTurn = conflictSide;
-        _MovesInCurrentTurnCount = 0;
-        TurnChanged?.Invoke(conflictSide);
     }
 
     public void NextTurn()
     {
         CurrentTurn++;
-        _MovesInCurrentTurnCount = 0;
         
         if ((int) CurrentTurn > 4)
         {
@@ -64,14 +61,7 @@ public class TurnManager
     #endregion Inspector Variables
 
 
-    #region Unity Methods
-    
-    #endregion Unity Methods
-
-
     #region Private Variables
-
-    private int _MovesInCurrentTurnCount;
     
     #endregion Private Variables
 
@@ -80,9 +70,7 @@ public class TurnManager
 
     private void OnFigureMove(GridFigure gridFigure)
     {
-        _MovesInCurrentTurnCount++;
-
-        if (_MovesInCurrentTurnCount >= PlayerManager.GetPlayer(gridFigure.conflictSide).GetGridFiguresCount())
+        if (PlayerManager.GetPlayer(CurrentTurn).movesLeft <= 0)
         {
             NextTurn();
         }
