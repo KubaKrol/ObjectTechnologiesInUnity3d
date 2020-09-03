@@ -46,6 +46,7 @@ public class Player
         this.conflictSide = conflictSide;
         
         GridFigure.FigureDestroyed += RemoveGridFigure;
+        GridFigure.FigureRevoked += AddGridFigure;
     }
 
     public void AddGridFigure(GridFigure newGridFigure)

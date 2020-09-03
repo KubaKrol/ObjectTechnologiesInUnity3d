@@ -9,12 +9,22 @@ public class MouseInput : IAmInput
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
-    public bool SingleClick()
+    public bool Select()
     {
         return Input.GetMouseButtonDown(0);
     }
-    
-    public bool HoldingScreenToLookAround()
+
+    public bool DoubleClickStarted()
+    {
+        return false;
+    }
+
+    public bool DoubleClickEnded()
+    {
+        return false;
+    }
+
+    public bool LookingAround()
     {
         return Input.GetMouseButton(0);
     }

@@ -24,6 +24,7 @@ public class GameSettings : ScriptableObject
         {
             _ConflictSideColors = new Dictionary<EConflictSide, Color>();
             
+            _ConflictSideColors.Add((EConflictSide)0, Color_Independent);
             _ConflictSideColors.Add((EConflictSide)1, Color_Player1Team);
             _ConflictSideColors.Add((EConflictSide)2, Color_Player2Team);
             _ConflictSideColors.Add((EConflictSide)3, Color_Player3Team);
@@ -40,7 +41,8 @@ public class GameSettings : ScriptableObject
 
     [Range(1, 4)]
     [SerializeField] public int AmountOfPlayers;
-    
+
+    [SerializeField] public Color Color_Independent;
     [SerializeField] public Color Color_Player1Team;
     [SerializeField] public Color Color_Player2Team;
     [SerializeField] public Color Color_Player3Team;

@@ -13,12 +13,18 @@ public class City : MonoBehaviour
 
     #region Public Variables
 
+    public GameSettings GameSettings;
+    public SpriteRenderer MushroomHatSprite;
+
     #endregion Public Variables
 
 
     #region Public Methods
 
-    public GameSettings GameSettings;
+    public void UpdateMushroomHatColor()
+    {
+        SetMushroomHatColor(GameSettings.GetConflictSideColor(_MyHexCell.conflictSide));  
+    }
     
     #endregion Public Methods
 
@@ -33,16 +39,23 @@ public class City : MonoBehaviour
     private void OnEnable()
     {
         TurnManager.TurnsReset += OnTurnsReset;
+        GridFigure.FigureMoveAction += OnFigureMoved;
     }
 
     private void OnDisable()
     {
         TurnManager.TurnsReset -= OnTurnsReset;
+        GridFigure.FigureMoveAction -= OnFigureMoved;
     }
 
     private void Awake()
     {
         _MyHexCell = GetComponentInParent<HexCell>();
+    }
+
+    private void Start()
+    {
+        SetMushroomHatColor(GameSettings.GetConflictSideColor(_MyHexCell.conflictSide));
     }
 
     #endregion Unity Methods
@@ -56,6 +69,24 @@ public class City : MonoBehaviour
 
 
     #region Private Methods
+
+    private void OnFigureMoved(GridFigure movedFigure)
+    {
+        if (MushroomHatSprite.color != GameSettings.GetConflictSideColor(_MyHexCell.conflictSide))
+        {
+            UpdateMushroomHatColor();
+        }
+    }
+
+    private void SetMushroomHatColor(Color color)
+    {
+        MushroomHatSprite.color = color;
+    }
+
+    private Color GetMushroomHatColor()
+    {
+        return MushroomHatSprite.color;
+    }
 
     private void OnTurnsReset()
     {
@@ -74,9 +105,8 @@ public class City : MonoBehaviour
 
     private void CreateNewGridFigure()
     {
-        var newGridFigureObject = Instantiate(GameSettings.firstTierGridFigure);
+        var newGridFigureObject = Instantiate(GameSettings.firstTierGridFigure, _MyHexCell.transform, true);
         newGridFigureObject.transform.position = _MyHexCell.transform.position;
-        newGridFigureObject.transform.parent = _MyHexCell.transform;
 
         var newGridFigure = newGridFigureObject.GetComponent<GridFigure>();
         newGridFigure.SetHexCell(_MyHexCell);

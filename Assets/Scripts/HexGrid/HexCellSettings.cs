@@ -13,4 +13,6 @@ public class HexCellSettings : ScriptableObject
     [SerializeField] public Sprite citySprite;
 
     [SerializeField] public Sprite[] borderSprites;
+
+    [SerializeField] public GameObject mushroomHatPrefab;
 }

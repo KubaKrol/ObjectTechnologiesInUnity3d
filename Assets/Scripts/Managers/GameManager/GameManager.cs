@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using GenericEnums;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +17,11 @@ public class GameManager : MonoBehaviour
     public void NextTurn()
     {
         _TurnManager.NextTurn();
+    }
+
+    public void UndoCurrentTurn()
+    {
+        _TurnManager.UndoCurrentTurn();
     }
     
     #endregion Public Methods
@@ -44,6 +46,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 1000;
+        
         _PlayerManager = new PlayerManager();
         _TurnManager = new TurnManager();
         _GameInputHandler = new GameInputHandler(_GameInput.currentInput, _TurnManager);

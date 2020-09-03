@@ -1,24 +1,82 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using GenericEnums;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GridFigure : MonoBehaviour
+public class GridFigure : MonoBehaviour, IAmMemorized
 {
     #region Public Types
+    
+    private struct GridFigureMementoData : IMementoData
+    {
+        private Vector3 Position;
+        private int FigureStrength;
+        private bool MadeMoveThisTurn;
+        private HexCell myHexCell;
+        private bool enabled;
+        private GenericEnums.ESelectionState selectionState;
+
+        public void Save(IAmMemorized memorizedObject)
+        {
+            if (memorizedObject is GridFigure gridFigure)
+            {
+                Position = gridFigure.transform.position;
+                MadeMoveThisTurn = gridFigure.MadeMoveThisTurn;
+                FigureStrength = gridFigure.FigureStrength;
+                myHexCell = gridFigure._MyHexCell;
+                enabled = gridFigure.gameObject.activeSelf;
+                selectionState = gridFigure.selectionState;
+            }
+        }
+
+        public void Load(IAmMemorized memorizedObject)
+        {
+            if (memorizedObject is GridFigure gridFigure)
+            {
+                gridFigure.transform.position = Position;
+                gridFigure.MadeMoveThisTurn = MadeMoveThisTurn;
+                gridFigure.FigureStrength = FigureStrength;
+                gridFigure._MyHexCell = myHexCell;
+                gridFigure.transform.parent = gridFigure._MyHexCell.transform;
+                gridFigure.selectionState = selectionState;
+
+                if (enabled)
+                {
+                    if (!gridFigure.gameObject.activeSelf)
+                    {
+                        gridFigure.gameObject.SetActive(true);
+                        FigureRevoked?.Invoke(gridFigure);
+                    }
+                }
+                else
+                {
+                    if (gridFigure.gameObject.activeSelf)
+                    {
+                        gridFigure.gameObject.SetActive(false);
+                    }
+                }
+                
+                gridFigure._MyStats.UpdateStats();
+            }
+        }
+    }
     
     #endregion Public Types
 
 
     #region Public Variables
-
+    
     public static bool FigureCurrentlyMoving;
+
+    public IMementoData MyMementoData { get; set; }
 
     public bool MadeMoveThisTurn { get; private set; }
     
     public static UnityAction<GridFigure> FigureMoveAction;
     public static UnityAction<GridFigure> FigureDestroyed;
+    public static UnityAction<GridFigure> FigureRevoked;
     
     public GenericEnums.ESelectionState selectionState { get; private set; }
     public GenericEnums.EConflictSide conflictSide { get; private set; }
@@ -128,9 +186,10 @@ public class GridFigure : MonoBehaviour
 
     public virtual void Destroy()
     {
-        transform.parent = null;
+        //transform.parent = null;
         FigureDestroyed?.Invoke(this);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        //Destroy(gameObject);
     }
 
     public virtual void IncreaseStrength(int customValue = 0)
@@ -146,6 +205,14 @@ public class GridFigure : MonoBehaviour
         
         _MyStats.UpdateStats();
     }
+    
+    public void CreateMementoData()
+    {
+        if (MyMementoData == null)
+        {
+            MyMementoData = new GridFigureMementoData();
+        }
+    }
 
     #endregion Public Methods
 
@@ -156,7 +223,6 @@ public class GridFigure : MonoBehaviour
     
     [SerializeField] public int DefaultMovementRange = 2;
     [SerializeField] public int FigureStrength = 16;
-    [SerializeField] public int FigureMorals = 8;
 
     [SerializeField] public int FigureStrengthIncreaseRate = 16;
 
@@ -192,7 +258,7 @@ public class GridFigure : MonoBehaviour
 
 
     #region Private Variables
-
+    
     protected HexCell _MyHexCell;
     
     protected Coroutine _MoveCoroutine;

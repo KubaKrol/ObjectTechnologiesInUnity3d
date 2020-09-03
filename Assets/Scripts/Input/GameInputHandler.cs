@@ -25,7 +25,7 @@ public class GameInputHandler
 
     public void HandleInput()
     {
-        if (_CurrentGameInput.SingleClick() && !GridFigure.FigureCurrentlyMoving)
+        if (_CurrentGameInput.Select() && !GridFigure.FigureCurrentlyMoving)
         {
             HexGrid.SelectCellAction?.Invoke(HexGrid.GetCell(_CurrentGameInput.PointerWorldPosition()), _TurnManager.CurrentTurn);
         }

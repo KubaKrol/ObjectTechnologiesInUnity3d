@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using GenericEnums;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameCanvas : MonoBehaviour
 {
@@ -23,9 +22,10 @@ public class GameCanvas : MonoBehaviour
 
 
     #region Inspector Variables
-
+    
     [SerializeField] private TextMeshProUGUI _CurrentTurnText;
     [SerializeField] private GameSettings _GameSettings;
+    [SerializeField] private Button _UndoTurnButton;
     
     #endregion Inspector Variables
 
@@ -34,14 +34,21 @@ public class GameCanvas : MonoBehaviour
 
     private void OnEnable()
     {
-        TurnManager.TurnChanged += OnTurnChanged;
+        TurnManager.EndTurn += OnTurnChanged;
+        TurnManager.TurnUndone += OnTurnUndone;
         GridFigure.FigureMoveAction += OnFigureMove;
     }
 
     private void OnDisable()
     {
-        TurnManager.TurnChanged -= OnTurnChanged;
+        TurnManager.EndTurn -= OnTurnChanged;
+        TurnManager.TurnUndone -= OnTurnUndone;
         GridFigure.FigureMoveAction -= OnFigureMove;
+    }
+
+    private void Awake()
+    {
+        _UndoTurnButton.interactable = false;
     }
 
     #endregion Unity Methods
@@ -49,7 +56,11 @@ public class GameCanvas : MonoBehaviour
 
     #region Private Variables
 
+    private static TextMeshProUGUI _StaticDebugText; 
+    
     private EConflictSide _CurrentConflictSide;
+
+    private bool _TurnUndone;
     
     #endregion Private Variables
 
@@ -61,11 +72,25 @@ public class GameCanvas : MonoBehaviour
         _CurrentConflictSide = currentTurn;
         _CurrentTurnText.text = "Current turn: " + currentTurn + " moves left: " + PlayerManager.GetPlayer(currentTurn).movesLeft;
         _CurrentTurnText.color = _GameSettings.GetConflictSideColor(currentTurn);
+        _UndoTurnButton.interactable = false;
+        _TurnUndone = false;
+    }
+
+    private void OnTurnUndone()
+    {
+        _CurrentTurnText.text = "Current turn: " + _CurrentConflictSide + " moves left: " + PlayerManager.GetPlayer(_CurrentConflictSide).movesLeft;
+        _UndoTurnButton.interactable = false;
+        _TurnUndone = true;
     }
 
     private void OnFigureMove(GridFigure movedFigure)
     {
         _CurrentTurnText.text = "Current turn: " + _CurrentConflictSide + " moves left: " + PlayerManager.GetPlayer(_CurrentConflictSide).movesLeft;
+        
+        if (!_UndoTurnButton.interactable && !_TurnUndone)
+        {
+            _UndoTurnButton.interactable = true;
+        }
     }
 
     #endregion Private Methods

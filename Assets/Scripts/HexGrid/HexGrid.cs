@@ -75,7 +75,7 @@ public class HexGrid : MonoBehaviour
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, y);
         cell.SetNoiseValue(noiseValue);
         cell.SetCellType(cellType);
-        cell.SetOrderInLayer(_HexGridSettings.width - y);
+        //cell.SetOrderInLayer(_HexGridSettings.width - y);
         _CellsDictionary.Add(cell.coordinates, cell);
 
         if (_HexGridSettings.showLabels)
@@ -197,22 +197,22 @@ public class HexGrid : MonoBehaviour
         {
             for (int x = 0; x < _HexGridSettings.width; x++)
             {
-                if (noise[y][x] < 0.05f)
+                if (noise[y][x] < 0.1f)
                 {
                     CreateCell(x, y, i++, noise[y][x], HexCell.ECellType.DeepWater);
                 }
 
-                if (noise[y][x] >= 0.05f && noise[y][x] < 0.3f)
+                if (noise[y][x] >= 0.1f && noise[y][x] < 0.3f)
                 {
                     CreateCell(x, y, i++, noise[y][x], HexCell.ECellType.Water);
                 }
 
-                if (noise[y][x] >= 0.3f && noise[y][x] < 0.55f)
+                if (noise[y][x] >= 0.3f && noise[y][x] < 0.6f)
                 {
                     CreateCell(x, y, i++, noise[y][x], HexCell.ECellType.Field);
                 }
 
-                if (noise[y][x] >= 0.55f && noise[y][x] < 0.75f)
+                if (noise[y][x] >= 0.6f && noise[y][x] < 0.75f)
                 {
                     CreateCell(x, y, i++, noise[y][x], HexCell.ECellType.Forest);
                 }
@@ -228,6 +228,40 @@ public class HexGrid : MonoBehaviour
         {
             _HexGridCityPlanner = new HexGridCityPlanner(_HexGridSettings);
             _HexGridCityPlanner.RunCityPlanner();
+        }
+        
+        SetCorrectOrderInLayerForEveryCell();
+    }
+
+    private void SetCorrectOrderInLayerForEveryCell()
+    {
+        for (int i = _Cells.Length - 1; i > 0; i--)
+        {
+            var cellNeighbours = _Cells[i].neighbourCells;
+
+            if (cellNeighbours[0] != null)
+            {
+                if (_Cells[i].orderInRenderingLayer <= cellNeighbours[0].orderInRenderingLayer)
+                {
+                    _Cells[i].SetOrderInLayer(cellNeighbours[0].orderInRenderingLayer + 1);
+                }   
+            }
+
+            if (cellNeighbours[1] != null)
+            {
+                if (_Cells[i].orderInRenderingLayer <= cellNeighbours[1].orderInRenderingLayer)
+                {
+                    _Cells[i].SetOrderInLayer(cellNeighbours[1].orderInRenderingLayer + 1);
+                }   
+            }
+
+            if (cellNeighbours[5] != null)
+            {
+                if (_Cells[i].orderInRenderingLayer <= cellNeighbours[5].orderInRenderingLayer)
+                {
+                    _Cells[i].SetOrderInLayer(cellNeighbours[5].orderInRenderingLayer + 1);
+                }   
+            }
         }
     }
 

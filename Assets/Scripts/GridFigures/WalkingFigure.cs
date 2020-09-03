@@ -15,7 +15,7 @@ public class WalkingFigure : GridFigure
 
 
     #region Public Methods
-
+    
     public override void ShowMovementRange(bool active)
     {
         _CurrentMovementRange = DefaultMovementRange;
@@ -25,23 +25,11 @@ public class WalkingFigure : GridFigure
             _CurrentMovementRange /= 2;
         }
         
-        var currentHexCoordinates = _MyHexCell.coordinates;
-        
-        for(var i = currentHexCoordinates.X - DefaultMovementRange; i <= currentHexCoordinates.X + DefaultMovementRange; i++)
-        {
-            for (var j = currentHexCoordinates.Y - DefaultMovementRange; j <= currentHexCoordinates.Y + DefaultMovementRange; j++)
-            {
-                var targetHexCell = HexGrid.GetCell(new HexCoordinates(i, j));
+        var reachableHexes = ReachableHexes(_MyHexCell, _CurrentMovementRange);
 
-                if (targetHexCell != null && HexMetrics.Distance(_MyHexCell, targetHexCell) <= _CurrentMovementRange)
-                {
-                    if (targetHexCell.cellType != HexCell.ECellType.Mountains &&
-                        targetHexCell.cellType != HexCell.ECellType.Water)
-                    {
-                        targetHexCell.ShowMovementAvailability(active);   
-                    }
-                }
-            }
+        foreach (var reachableHex in reachableHexes)
+        {
+            reachableHex.ShowMovementAvailability(active);
         }
     }
 
@@ -59,7 +47,48 @@ public class WalkingFigure : GridFigure
 
 
     #region Private Variables
+    
+    private List<HexCell> ReachableHexes(HexCell origin, int movementRange)
+    {
+        movementRange += 1;
+        
+        List<HexCell> visited = new List<HexCell>();
+        List<List<HexCell>> fringes = new List<List<HexCell>>();
+        
+        fringes.Add(new List<HexCell>());
+        fringes[0].Add(origin);
+        
+        for (int i = 1; i < movementRange; i++)
+        {
+            fringes.Add(new List<HexCell>());
 
+            foreach (var hex in fringes[i-1])
+            {
+                var allNeighbours = HexMetrics.GetAllNeighbours(hex);
+
+                for (int j = 0; j < 6; j++)
+                {
+                    if (allNeighbours[j] != null && !visited.Contains(allNeighbours[j]) && allNeighbours[j].locomotionState == HexCell.ELocomotionState.Walkable)
+                    {
+                        fringes[i].Add(allNeighbours[j]);
+                        visited.Add(allNeighbours[j]);
+                    }  
+                }
+                
+                /*foreach (var neighbour in allNeighbours)
+                {
+                    if (!visited.Contains(neighbour) && neighbour.locomotionState == HexCell.ELocomotionState.Walkable)
+                    {
+                        fringes[i].Add(neighbour);
+                        visited.Add(neighbour);
+                    }   
+                }*/
+            }
+        }
+
+        return visited;
+    }
+    
     #endregion Private Variables
 
 

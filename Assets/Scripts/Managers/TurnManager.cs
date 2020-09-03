@@ -13,7 +13,10 @@ public class TurnManager
 
     #region Public Variables
 
-    public static UnityAction<EConflictSide> TurnChanged;
+    public static UnityAction SaveTurn;
+    public static UnityAction UndoTurn;
+    public static UnityAction TurnUndone;
+    public static UnityAction<EConflictSide> EndTurn;
     public static UnityAction TurnsReset;
     
     public EConflictSide CurrentTurn { get; private set; }
@@ -32,7 +35,7 @@ public class TurnManager
     {
         SetTurn(EConflictSide.Player_1);
         TurnsReset?.Invoke();
-        TurnChanged?.Invoke(CurrentTurn);
+        EndTurn?.Invoke(CurrentTurn);
     }
     
     public void SetTurn(EConflictSide conflictSide)
@@ -50,7 +53,14 @@ public class TurnManager
             TurnsReset?.Invoke();
         }
         
-        TurnChanged?.Invoke(CurrentTurn);
+        EndTurn?.Invoke(CurrentTurn);
+        SaveTurn?.Invoke();
+    }
+
+    public void UndoCurrentTurn()
+    {
+        UndoTurn?.Invoke();
+        TurnUndone?.Invoke();
     }
 
     #endregion Public Methods

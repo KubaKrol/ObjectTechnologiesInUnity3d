@@ -2,7 +2,7 @@
 using GenericEnums;
 using UnityEngine;
 
-public class HexCell : MonoBehaviour
+public class HexCell : MonoBehaviour, IAmMemorized
 {
     #region Public Types
 
@@ -20,7 +20,47 @@ public class HexCell : MonoBehaviour
     {
         Blocked,
         Walkable,
-        Swimmingable
+        Swimmable,
+        Flyable
+    }
+    
+    private struct HexCellMementoData : IMementoData
+    {
+        private GridFigure currentlyHeldGridFigure;
+        private GenericEnums.EConflictSide conflictSide;
+
+        public void Save(IAmMemorized memorizedObject)
+        {
+            if (memorizedObject is HexCell hexCell)
+            {
+                currentlyHeldGridFigure = hexCell.currentlyHeldFigure;
+                conflictSide = hexCell.conflictSide;
+            }
+        }
+
+        public void Load(IAmMemorized memorizedObject)
+        {
+            if (memorizedObject is HexCell hexCell)
+            {
+                hexCell._CurrentFigure = currentlyHeldGridFigure;
+                
+                hexCell.conflictSide = conflictSide;
+                hexCell.CheckBorders();
+                
+                foreach (var neighbourHexCell in hexCell.neighbourCells)
+                {
+                    if(neighbourHexCell == null)
+                        return;
+                    
+                    neighbourHexCell.CheckBorders();
+                }
+
+                if (hexCell.cellType == ECellType.City)
+                {
+                    hexCell.myCity.UpdateMushroomHatColor();
+                }
+            }
+        }
     }
 
     #endregion Public Types
@@ -32,7 +72,8 @@ public class HexCell : MonoBehaviour
     public GenericEnums.ESelectionState selectionState { get; private set; }
     public ELocomotionState locomotionState { get; private set; }
     public GenericEnums.EConflictSide conflictSide { get; private set; }
-
+    public IMementoData MyMementoData { get; set; }
+    
     public HexCell[] neighbourCells
     {
         get
@@ -58,6 +99,19 @@ public class HexCell : MonoBehaviour
         {
             _CurrentFigure = GetComponentInChildren<GridFigure>();
             return _CurrentFigure;
+        }
+    }
+
+    public City myCity
+    {
+        get
+        {
+            if (_MyCity == null)
+            {
+                _MyCity = GetComponent<City>();
+            }
+
+            return _MyCity;
         }
     }
     
@@ -97,17 +151,17 @@ public class HexCell : MonoBehaviour
             
             case ECellType.Water:
                 _MySpriteRenderer.sprite = cellSettings.waterSprite;
-                locomotionState = ELocomotionState.Swimmingable;
+                locomotionState = ELocomotionState.Swimmable;
                 break;
             
             case ECellType.DeepWater:
                 _MySpriteRenderer.sprite = cellSettings.deepWaterSprite;
-                locomotionState = ELocomotionState.Swimmingable;
+                locomotionState = ELocomotionState.Swimmable;
                 break;
             
             case ECellType.Forest:
                 
-                if (myNoiseValue < 0.60f)
+                if (myNoiseValue < 0.65f)
                 {
                     _MySpriteRenderer.sprite = cellSettings.forestSprite;
                 }
@@ -153,14 +207,6 @@ public class HexCell : MonoBehaviour
         
         orderInRenderingLayer = orderInLayer;
         _MySpriteRenderer.sortingOrder = orderInLayer;
-
-        mySelectionHighlightObject.GetComponent<SpriteRenderer>().sortingOrder = orderInLayer + 1;
-        myMovementRangeHighlightObject.GetComponent<SpriteRenderer>().sortingOrder = orderInLayer + 1;
-
-        foreach (var borders in _BorderSpriteRenderers)
-        {
-            borders.sortingOrder = orderInLayer + 1;
-        }
     }
 
     public void SetConflictSide(EConflictSide conflictSide)
@@ -178,7 +224,9 @@ public class HexCell : MonoBehaviour
                 if (neighbourCells[i] != null)
                 {
                     _BorderSpriteRenderers[i].gameObject.SetActive(neighbourCells[i].conflictSide != conflictSide);
-                    _BorderSpriteRenderers[i].color = _GameSettings.GetConflictSideColor(conflictSide);   
+                    var newColor = _GameSettings.GetConflictSideColor(conflictSide);
+                    newColor.a = 0.6f;
+                    _BorderSpriteRenderers[i].color = newColor;
                 }
             }
         }
@@ -194,6 +242,14 @@ public class HexCell : MonoBehaviour
     public void SetNoiseValue(float value)
     {
         myNoiseValue = value;
+    }
+    
+    public void CreateMementoData()
+    {
+        if (MyMementoData == null)
+        {
+            MyMementoData = new HexCellMementoData();
+        } 
     }
     
     #endregion Public Methods
@@ -250,6 +306,7 @@ public class HexCell : MonoBehaviour
     private SpriteRenderer _MySpriteRenderer;
     private GridFigure _CurrentFigure;
     private HexCell[] _MyNeighbourCells;
+    private City _MyCity;
 
     #endregion Private Variables
 
@@ -271,7 +328,11 @@ public class HexCell : MonoBehaviour
     private void InstantiateCity(GameSettings gameSettings)
     {
         var city = gameObject.AddComponent<City>();
+        city.gameObject.AddComponent<Memento>();
         city.GameSettings = gameSettings;
+
+        var mushroomHat = Instantiate(cellSettings.mushroomHatPrefab, transform);
+        city.MushroomHatSprite = mushroomHat.GetComponentInChildren<SpriteRenderer>();
     }
 
     private void OnFigureMoved(GridFigure figure)

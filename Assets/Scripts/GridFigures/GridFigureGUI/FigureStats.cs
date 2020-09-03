@@ -53,7 +53,6 @@ public class FigureStats : MonoBehaviour
     #region Private Variables
 
     private GridFigure _MyGridFigure;
-    
     private CanvasGroup _MyCanvasGroup;
 
     #endregion Private Variables

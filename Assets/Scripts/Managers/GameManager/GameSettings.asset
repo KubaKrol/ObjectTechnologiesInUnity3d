@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   AmountOfPlayers: 4
+  Color_Independent: {r: 1, g: 1, b: 1, a: 1}
   Color_Player1Team: {r: 1, g: 0, b: 0, a: 1}
   Color_Player2Team: {r: 0, g: 0.14089537, b: 1, a: 1}
   Color_Player3Team: {r: 1, g: 0, b: 0.90058327, a: 1}

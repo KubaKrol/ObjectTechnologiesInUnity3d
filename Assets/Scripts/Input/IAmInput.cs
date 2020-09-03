@@ -4,8 +4,10 @@ public interface IAmInput
 {
     Vector2 PointerWorldPosition();
 
-    bool SingleClick();
-    bool HoldingScreenToLookAround();
+    bool Select();
+    bool DoubleClickStarted();
+    bool DoubleClickEnded();
+    bool LookingAround();
     float ZoomIn();
     float ZoomOut();
 }

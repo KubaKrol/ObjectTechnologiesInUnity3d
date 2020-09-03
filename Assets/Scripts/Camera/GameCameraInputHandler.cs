@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics;
+using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class GameCameraInputHandler
 {
@@ -21,19 +23,21 @@ public class GameCameraInputHandler
         _CurrentGameInput = currentGameInput;
         _GameCamera = gameCamera;
     }
-
+    
     public void HandleInput()
     {
         _GameCamera.Zoom(_CurrentGameInput.ZoomIn());
 
-        if (_CurrentGameInput.SingleClick())
+        _CurrentGameInput.DoubleClickStarted();
+        
+        if (_CurrentGameInput.Select() || _CurrentGameInput.DoubleClickEnded())
         {
             _InputStartPosition = _CurrentGameInput.PointerWorldPosition();
             _InputStartPositionInCameraLocalSpace = _GameCamera.transform.InverseTransformPoint(_InputStartPosition);
             _GameCameraStartPosition = _GameCamera.transform.position;
         }
-        
-        if (_CurrentGameInput.HoldingScreenToLookAround())
+
+        if (_CurrentGameInput.LookingAround())
         {
             var pointerCurrentPositionRelativeToStartingPosition = -(_CurrentGameInput.PointerWorldPosition() - _InputStartPosition);
             _InputStartPosition = _GameCamera.transform.TransformPoint(_InputStartPositionInCameraLocalSpace);
