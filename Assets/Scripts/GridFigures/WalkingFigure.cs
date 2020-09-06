@@ -74,15 +74,6 @@ public class WalkingFigure : GridFigure
                         visited.Add(allNeighbours[j]);
                     }  
                 }
-                
-                /*foreach (var neighbour in allNeighbours)
-                {
-                    if (!visited.Contains(neighbour) && neighbour.locomotionState == HexCell.ELocomotionState.Walkable)
-                    {
-                        fringes[i].Add(neighbour);
-                        visited.Add(neighbour);
-                    }   
-                }*/
             }
         }
 

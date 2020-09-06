@@ -86,16 +86,20 @@ public class GridFigure : MonoBehaviour, IAmMemorized
 
     #region Public Methods
 
+    //Template Method
     public virtual void Select()
     {
         selectionState = GenericEnums.ESelectionState.Selected;
         ShowMovementRange(true);
+        PlaySelectionAnimation();
+        PlaySelectionSound();
     }
 
     public virtual void Deselect()
     {
         selectionState = GenericEnums.ESelectionState.Idle;
         ShowMovementRange(false);
+        StopSelectionAnimation();
     }
     
     public virtual void MoveFigure(HexCell hexCell)
@@ -205,6 +209,21 @@ public class GridFigure : MonoBehaviour, IAmMemorized
         
         _MyStats.UpdateStats();
     }
+
+    public virtual void PlaySelectionAnimation()
+    {
+        _MyAnimator.SetTrigger("Select");
+    }
+
+    public virtual void StopSelectionAnimation()
+    {
+        _MyAnimator.SetTrigger("Deselect");
+    }
+
+    public virtual void PlaySelectionSound()
+    {
+        //SoundManager.PlaySound(selectionSound);
+    }
     
     public void CreateMementoData()
     {
@@ -249,6 +268,11 @@ public class GridFigure : MonoBehaviour, IAmMemorized
         TurnManager.TurnsReset -= ResetMovementStatus;
     }
 
+    private void Awake()
+    {
+        _MyAnimator = GetComponent<Animator>();
+    }
+
     private void Start()
     {
         _MyStats.UpdateStats();
@@ -260,6 +284,7 @@ public class GridFigure : MonoBehaviour, IAmMemorized
     #region Private Variables
     
     protected HexCell _MyHexCell;
+    protected Animator _MyAnimator;
     
     protected Coroutine _MoveCoroutine;
     protected Vector2 _MovingVelocity;

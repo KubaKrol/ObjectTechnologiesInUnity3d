@@ -860,6 +860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _CurrentTurnText: {fileID: 1580742272}
   _GameSettings: {fileID: 11400000, guid: a2c146c72aa9b5d498b5f9bf2214db86, type: 2}
+  _UndoTurnButton: {fileID: 1633852736}
 --- !u!1 &1451609126
 GameObject:
   m_ObjectHideFlags: 0

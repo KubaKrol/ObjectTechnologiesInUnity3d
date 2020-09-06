@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public void NextTurn()
     {
-        _TurnManager.NextTurn();
+        _NextTurnValidator.CheckPlayerMoves(_TurnManager.CurrentTurn, _TurnManager);
     }
 
     public void UndoCurrentTurn()
@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameInput _GameInput;
     [SerializeField] private GameCamera _GameCamera;
     [SerializeField] private HexGrid _HexGrid;
+    [SerializeField] private GameCanvas _GameCanvas;
 
     #endregion Inspector Variables
 
@@ -52,6 +53,8 @@ public class GameManager : MonoBehaviour
         _PlayerManager = new PlayerManager();
         _TurnManager = new TurnManager();
         _GameInputHandler = new GameInputHandler(_GameInput.currentInput, _TurnManager);
+        
+        _NextTurnValidator = GetComponent<NextTurnValidator>();
         
         _PlayerManager.InitializePlayers(_GameSettings.AmountOfPlayers);
         _HexGrid.CreateGrid();
@@ -76,6 +79,7 @@ public class GameManager : MonoBehaviour
     private GameInputHandler _GameInputHandler;
     private PlayerManager _PlayerManager;
     private TurnManager _TurnManager;
+    private NextTurnValidator _NextTurnValidator;
 
     #endregion Private Variables
 

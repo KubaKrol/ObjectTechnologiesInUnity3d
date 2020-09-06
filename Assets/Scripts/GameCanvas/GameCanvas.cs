@@ -26,7 +26,7 @@ public class GameCanvas : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _CurrentTurnText;
     [SerializeField] private GameSettings _GameSettings;
     [SerializeField] private Button _UndoTurnButton;
-    
+
     #endregion Inspector Variables
 
 
@@ -56,7 +56,7 @@ public class GameCanvas : MonoBehaviour
 
     #region Private Variables
 
-    private static TextMeshProUGUI _StaticDebugText; 
+    private static TextMeshProUGUI _StaticDebugText;
     
     private EConflictSide _CurrentConflictSide;
 
