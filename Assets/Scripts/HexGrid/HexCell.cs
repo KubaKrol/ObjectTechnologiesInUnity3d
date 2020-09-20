@@ -42,8 +42,15 @@ public class HexCell : MonoBehaviour, IAmMemorized
         {
             if (memorizedObject is HexCell hexCell)
             {
-                hexCell._CurrentFigure = currentlyHeldGridFigure;
-                
+                if (currentlyHeldGridFigure == null)
+                {
+                    hexCell.ShowFigureAvailabilityHighlight(false);
+                }
+                else
+                {
+                    hexCell._CurrentFigure = currentlyHeldGridFigure;   
+                }
+
                 hexCell.conflictSide = conflictSide;
                 hexCell.CheckBorders();
                 
@@ -243,6 +250,11 @@ public class HexCell : MonoBehaviour, IAmMemorized
     {
         myNoiseValue = value;
     }
+
+    public void ShowFigureAvailabilityHighlight(bool active)
+    {
+        gridFigureAvailabilityHighlightObject.gameObject.SetActive(active);
+    }
     
     public void CreateMementoData()
     {
@@ -266,6 +278,7 @@ public class HexCell : MonoBehaviour, IAmMemorized
 
     [SerializeField] public GameObject mySelectionHighlightObject;
     [SerializeField] public GameObject myMovementRangeHighlightObject;
+    [SerializeField] public GameObject gridFigureAvailabilityHighlightObject;
 
     [Header("Dependencies")]
     
@@ -282,12 +295,14 @@ public class HexCell : MonoBehaviour, IAmMemorized
     {
         HexGrid.SelectCellAction += SelectCellAction;
         GridFigure.FigureMoveAction += OnFigureMoved;
+        TurnManager.TurnUndone += OnTurnUndone;
     }
 
     private void OnDisable()
     {
         HexGrid.SelectCellAction -= SelectCellAction;
         GridFigure.FigureMoveAction -= OnFigureMoved;
+        TurnManager.TurnUndone -= OnTurnUndone;
     }
     
     private void Awake()
@@ -338,6 +353,20 @@ public class HexCell : MonoBehaviour, IAmMemorized
     private void OnFigureMoved(GridFigure figure)
     {
         CheckBorders();
+    }
+
+    private void OnTurnUndone(EConflictSide currentTurn)
+    {
+        if (currentlyHeldFigure != null)
+        {
+            if (currentTurn == currentlyHeldFigure.conflictSide)
+            {
+                if (!currentlyHeldFigure.MadeMoveThisTurn)
+                {
+                    ShowFigureAvailabilityHighlight(true);   
+                }
+            }
+        }
     }
 
     #endregion Private Methods

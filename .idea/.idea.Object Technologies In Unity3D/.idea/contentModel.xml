@@ -49,7 +49,13 @@
             <e p="MobileInput.cs" t="Include" />
             <e p="MouseInput.cs" t="Include" />
           </e>
+          <e p="Iterator" t="Include">
+            <e p="FlyingGridFigureIterator.cs" t="Include" />
+            <e p="IGridFigureIterator.cs" t="Include" />
+            <e p="WalkingGridFigureIterator.cs" t="Include" />
+          </e>
           <e p="Managers" t="Include">
+            <e p="FiguresManager.cs" t="Include" />
             <e p="GameManager" t="Include">
               <e p="GameManager.cs" t="Include" />
               <e p="GameSettings.cs" t="Include" />

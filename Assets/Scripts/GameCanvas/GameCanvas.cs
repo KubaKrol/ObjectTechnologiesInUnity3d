@@ -76,7 +76,7 @@ public class GameCanvas : MonoBehaviour
         _TurnUndone = false;
     }
 
-    private void OnTurnUndone()
+    private void OnTurnUndone(EConflictSide currentTurn)
     {
         _CurrentTurnText.text = "Current turn: " + _CurrentConflictSide + " moves left: " + PlayerManager.GetPlayer(_CurrentConflictSide).movesLeft;
         _UndoTurnButton.interactable = false;

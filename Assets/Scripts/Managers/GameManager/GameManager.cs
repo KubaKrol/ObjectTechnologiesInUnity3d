@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 1000;
         
         _PlayerManager = new PlayerManager();
-        _TurnManager = new TurnManager();
+        _TurnManager = new TurnManager(_GameSettings.AmountOfPlayers);
         _GameInputHandler = new GameInputHandler(_GameInput.currentInput, _TurnManager);
         
         _NextTurnValidator = GetComponent<NextTurnValidator>();

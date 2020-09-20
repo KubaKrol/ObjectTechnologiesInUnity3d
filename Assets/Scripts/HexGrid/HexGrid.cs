@@ -202,12 +202,12 @@ public class HexGrid : MonoBehaviour
                     CreateCell(x, y, i++, noise[y][x], HexCell.ECellType.DeepWater);
                 }
 
-                if (noise[y][x] >= 0.1f && noise[y][x] < 0.3f)
+                if (noise[y][x] >= 0.1f && noise[y][x] < 0.23f)
                 {
                     CreateCell(x, y, i++, noise[y][x], HexCell.ECellType.Water);
                 }
 
-                if (noise[y][x] >= 0.3f && noise[y][x] < 0.6f)
+                if (noise[y][x] >= 0.23f && noise[y][x] < 0.6f)
                 {
                     CreateCell(x, y, i++, noise[y][x], HexCell.ECellType.Field);
                 }

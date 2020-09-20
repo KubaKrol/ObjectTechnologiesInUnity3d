@@ -18,5 +18,5 @@ MonoBehaviour:
   Color_Player2Team: {r: 0, g: 0.14089537, b: 1, a: 1}
   Color_Player3Team: {r: 1, g: 0, b: 0.90058327, a: 1}
   Color_Player4Team: {r: 0.034828067, g: 1, b: 0, a: 1}
-  firstTierGridFigure: {fileID: 87441045643972963, guid: 5b4a96c97228e094b9bdb8ec0e6c9350,
+  firstTierGridFigure: {fileID: 87441045643972963, guid: de85459559a9e5546965769a112b612a,
     type: 3}

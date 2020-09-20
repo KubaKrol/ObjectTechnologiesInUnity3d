@@ -29,11 +29,6 @@ public class Memento : MonoBehaviour
 
     private void Awake()
     {
-        if (MemorizedData == null)
-        {
-            MemorizedData = new Dictionary<IAmMemorized, IMementoData>();
-        }
-        
         _MyMemorizedObject = GetComponent<IAmMemorized>();
     }
 
@@ -42,7 +37,6 @@ public class Memento : MonoBehaviour
 
 #region Public Variables
 
-    public static Dictionary<IAmMemorized, IMementoData> MemorizedData;
     
 #endregion Public Variables
 

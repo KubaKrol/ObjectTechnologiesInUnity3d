@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public class GridFigure : MonoBehaviour, IAmMemorized
 {
+
     #region Public Types
     
     private struct GridFigureMementoData : IMementoData
@@ -36,9 +37,9 @@ public class GridFigure : MonoBehaviour, IAmMemorized
             if (memorizedObject is GridFigure gridFigure)
             {
                 gridFigure.transform.position = Position;
+                gridFigure._MyHexCell = myHexCell;
                 gridFigure.MadeMoveThisTurn = MadeMoveThisTurn;
                 gridFigure.FigureStrength = FigureStrength;
-                gridFigure._MyHexCell = myHexCell;
                 gridFigure.transform.parent = gridFigure._MyHexCell.transform;
                 gridFigure.selectionState = selectionState;
 
@@ -85,8 +86,7 @@ public class GridFigure : MonoBehaviour, IAmMemorized
 
 
     #region Public Methods
-
-    //Template Method
+    
     public virtual void Select()
     {
         selectionState = GenericEnums.ESelectionState.Selected;
@@ -190,10 +190,8 @@ public class GridFigure : MonoBehaviour, IAmMemorized
 
     public virtual void Destroy()
     {
-        //transform.parent = null;
         FigureDestroyed?.Invoke(this);
         gameObject.SetActive(false);
-        //Destroy(gameObject);
     }
 
     public virtual void IncreaseStrength(int customValue = 0)
@@ -260,12 +258,18 @@ public class GridFigure : MonoBehaviour, IAmMemorized
     {
         HexGrid.SelectCellAction += OnHexCellSelected;
         TurnManager.TurnsReset += ResetMovementStatus;
+        TurnManager.EndTurn += ShowAvailability;
+        FiguresManager.AddFigure(this);
     }
 
     private void OnDisable()
     {
         HexGrid.SelectCellAction -= OnHexCellSelected;
         TurnManager.TurnsReset -= ResetMovementStatus;
+        TurnManager.EndTurn += ShowAvailability;
+        FiguresManager.RemoveFigure(this);
+        
+        _MyHexCell.ShowFigureAvailabilityHighlight(false);
     }
 
     private void Awake()
@@ -358,6 +362,18 @@ public class GridFigure : MonoBehaviour, IAmMemorized
         MadeMoveThisTurn = false;
     }
 
+    private void ShowAvailability(EConflictSide currentTurn)
+    {
+        if (currentTurn == conflictSide)
+        {
+            _MyHexCell.ShowFigureAvailabilityHighlight(true);
+        }
+        else
+        {
+            _MyHexCell.ShowFigureAvailabilityHighlight(false); 
+        }
+    }
+
     #endregion Private Methods
 
 
@@ -365,6 +381,8 @@ public class GridFigure : MonoBehaviour, IAmMemorized
 
     private IEnumerator MoveFigureCoroutine(HexCell hexCell)
     {
+        _MyHexCell.ShowFigureAvailabilityHighlight(false);
+        
         FigureCurrentlyMoving = true;
         
         transform.parent = null;

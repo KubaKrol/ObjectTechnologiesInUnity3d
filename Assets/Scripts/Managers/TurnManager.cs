@@ -15,7 +15,7 @@ public class TurnManager
 
     public static UnityAction SaveTurn;
     public static UnityAction UndoTurn;
-    public static UnityAction TurnUndone;
+    public static UnityAction<EConflictSide> TurnUndone;
     public static UnityAction<EConflictSide> EndTurn;
     public static UnityAction TurnsReset;
     
@@ -26,8 +26,10 @@ public class TurnManager
 
     #region Public Methods
 
-    public TurnManager()
+    public TurnManager(int amountOfPlayers)
     {
+        _AmountOfPlayers = amountOfPlayers;
+        
         GridFigure.FigureMoveAction += OnFigureMove;
     }
     
@@ -47,7 +49,7 @@ public class TurnManager
     {
         CurrentTurn++;
         
-        if ((int) CurrentTurn > 4)
+        if ((int) CurrentTurn > _AmountOfPlayers)
         {
             CurrentTurn = (EConflictSide)1;
             TurnsReset?.Invoke();
@@ -60,7 +62,7 @@ public class TurnManager
     public void UndoCurrentTurn()
     {
         UndoTurn?.Invoke();
-        TurnUndone?.Invoke();
+        TurnUndone?.Invoke(CurrentTurn);
     }
 
     #endregion Public Methods
@@ -72,6 +74,8 @@ public class TurnManager
 
 
     #region Private Variables
+
+    private readonly int _AmountOfPlayers;
     
     #endregion Private Variables
 
@@ -80,10 +84,10 @@ public class TurnManager
 
     private void OnFigureMove(GridFigure gridFigure)
     {
-        if (PlayerManager.GetPlayer(CurrentTurn).movesLeft <= 0)
+        /*if (PlayerManager.GetPlayer(CurrentTurn).movesLeft <= 0)
         {
             NextTurn();
-        }
+        }*/
     }
     
     #endregion Private Methods
